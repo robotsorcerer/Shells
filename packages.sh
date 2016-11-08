@@ -29,7 +29,8 @@ sudo apt-get update
 wait
 
 printf '\n\n'
-sudo apt-get install -y build-essential libturbojpeg libjpeg-turbo8-dev libtool autoconf libudev-dev cmake mesa-common-dev freeglut3-dev libxrandr-dev doxygen libxi-dev libopencv-dev automake sublime-text openjdk-6-jdk freeglut3-dev libusb-1.0-0-dev ros-indigo-desktop-full python-catkin-tools python-rosinstall spotify-client  python-catkin-tools xdotool wmctrl beignet-dev opencl-headers subversion python-pip python-dev python3-pip  okular galculator libmatio2 mesa-utils xclip libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler luarocks
+sudo apt-get install -y build-essential libturbojpeg libjpeg-turbo8-dev libtool autoconf libudev-dev cmake mesa-common-dev freeglut3-dev libxrandr-dev doxygen libxi-dev libopencv-dev automake sublime-text openjdk-6-jdk freeglut3-dev libusb-1.0-0-dev ros-indigo-desktop-full python-catkin-tools python-rosinstall spotify-client  python-catkin-tools xdotool wmctrl beignet-dev opencl-headers subversion python-pip python-dev python3-pip  okular galculator libmatio2 mesa-utils xclip libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler luarocks libprotobuf-dev libprotoc-dev libprotobuf-c0-dev protobuf-c-compiler python-protobuf libhdf5-dev liblmdb-dev
+libleveldb-dev 
 wait
 
 echo "Installing Caffe"
