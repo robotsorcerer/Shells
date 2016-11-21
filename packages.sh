@@ -72,7 +72,9 @@ ros-indigo-pr2-mechanism-msgs ros-indigo-control-toolbox ros-indigo-pr2-controll
 ros-indigo-pr2-controller-manager ros-indigo-pr2-hardware-interface ros-indigo-pr2-gripper-action\
 ros-indigo-pr2-mechanism-diagnostics ros-indigo-pr2-mechanism-model ros-indigo-pr2-dashboard-aggregator \
 ros-indigo-pr2-mechanism-msgs ros-indigo-robot-mechanism-controllers ros-indigo-pr2-msgs ros-indigo-pr2-gazebo-plugins \
-libcppunit-1.13-0 libcppunit-dev ros-indigo-bfl  ros-indigo-robot-pose-ekf ros-indigo-joint-trajectory-action
+libcppunit-1.13-0 libcppunit-dev ros-indigo-bfl  ros-indigo-robot-pose-ekf ros-indigo-joint-trajectory-action \
+ros-indigo-pr2-simulator ros-indigo-pr2-gazebo ros-indigo-pr2-gazebo-plugins ros-indigo-pr2-controller-configuration-gazebo \
+ros-indigo-pr2-controller-configuration
 wait
 
 printf "\n\n installl glxinfo\n\n"
