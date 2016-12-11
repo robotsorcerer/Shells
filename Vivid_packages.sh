@@ -329,8 +329,6 @@ sudo gem install jekyll
 printf '\n\n %s'
 cd node-v0.12.7 && ./configure && make && sudo make install
 
-printf '\n\n%s\n' 'Jekyll'
-sudo gem install jekyll
 printf '\n\n %s'
 	```bash
 			All of Jekyll’s gem dependencies are automatically installed by the above cmd,
