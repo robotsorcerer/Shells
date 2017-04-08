@@ -178,8 +178,6 @@ else
 
 	wait
 
-	printf '\n\n Installation is now complete and ffmpeg is now ready for use. Your newly compiled FFmpeg programs are in ~/bin. \n\n'
-
 	cat <<-EOT
 
 		Installation is now complete and ffmpeg is now ready for use. Your newly compiled FFmpeg programs are in ~/bin.
