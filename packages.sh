@@ -9,7 +9,7 @@ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main
 
 printf '\n\n'
 echo "setting up your ros keys"
-sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv-key 0xB01FA116 
+sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv-key 0xB01FA116
 wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
 
 echo "Adding the Spotify repository signing key to be able to verify downloaded packages"
@@ -24,23 +24,23 @@ wait
 
 printf '\n\n'
 echo "updating your apt-get ..."
-cd ~ 
+cd ~
 sudo apt-get update
 wait
 
 printf '\n\n'
 sudo apt-get install -y build-essential libturbojpeg libjpeg-turbo8-dev libtool autoconf libudev-dev cmake mesa-common-dev freeglut3-dev libxrandr-dev doxygen libxi-dev libopencv-dev automake sublime-text openjdk-6-jdk freeglut3-dev libusb-1.0-0-dev ros-indigo-desktop-full python-catkin-tools python-rosinstall spotify-client  python-catkin-tools xdotool wmctrl beignet-dev opencl-headers subversion python-pip python-dev python3-pip  okular galculator libmatio2 mesa-utils xclip libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler luarocks libprotobuf-dev libprotoc-dev libprotobuf-c0-dev protobuf-c-compiler python-protobuf libhdf5-dev liblmdb-dev
-libleveldb-dev 
+libleveldb-dev
 wait
 
 echo "Installing Caffe"
-sudo apt-get install 
+sudo apt-get install
 wait
 sudo apt-get install --no-install-recommends libboost-all-dev libatlas-base-dev libgflags-dev libgoogle-glog-dev liblmdb-dev
 
 printf '\n\n'
 echo "setting up your catkin workspace"
-cd ~; 
+cd ~;
 mkdir -p ~/catkin_ws/src;
 cd ~/catkin_ws/src;
 catkin init;
@@ -62,7 +62,7 @@ wait
 
 
 printf "\n\n installl glxinfo\n\n"
-sudo apt-get install -y 
+sudo apt-get install -y
 wait
 
 luarocks install nn
@@ -78,19 +78,29 @@ wait
 
 printf '\n\n'
 echo "instaling texlive etc"
-cd && sudo apt-get install -y texstudio texlive-latex-extra texlive-bibtex-extra texlive-fonts-recommended
+cd && sudo apt-get install -y texstudio texlive-latex-extra texlive-bibtex-extra texlive-fonts-recommended texlive-science
 texlive-science
 wait
 
 echo "instaling moderncv dependencies"
 sudo mktexlsr
 wait
-
+pytorch
 printf '\n\n'
 echo "setting up git global configurations"
 cd ~/Downloads/Shells ;
 chmod +x gitsetup.sh;
 sudo sh gitsetup.sh;
+wait
+
+printf '\n instaling anaconda full version\n'
+wget https://repo.continuum.io/archive/Anaconda3-4.3.1-Linux-x86_64.sh
+wait
+bash Anaconda3-4.3.1-Linux-x86_64.sh
+
+
+printf '\nInstalling pytorch and torchvision\n'
+conda install pytorch torchvision cuda80 -c soumith
 wait
 
 printf '\n\n'
@@ -105,6 +115,7 @@ cat <<-EOT
 	cd ~/.dropbox-dist && ./dropboxd
 
 EOT
+
 
 #Change-logs
 #August 04, 2015
