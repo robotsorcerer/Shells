@@ -29,7 +29,12 @@ sudo apt-get update
 wait
 
 printf '\n\n'
-sudo apt-get install -y build-essential libturbojpeg libjpeg-turbo8-dev libtool autoconf libudev-dev cmake mesa-common-dev freeglut3-dev libxrandr-dev doxygen libxi-dev libopencv-dev automake sublime-text openjdk-6-jdk freeglut3-dev libusb-1.0-0-dev ros-indigo-desktop-full python-catkin-tools python-rosinstall spotify-client  python-catkin-tools xdotool wmctrl beignet-dev opencl-headers subversion python-pip python-dev python3-pip  okular galculator libmatio2 mesa-utils xclip libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler luarocks libprotobuf-dev libprotoc-dev libprotobuf-c0-dev protobuf-c-compiler python-protobuf libhdf5-dev liblmdb-dev
+
+sudo apt-get install -y build-essential libturbojpeg libjpeg-turbo8-dev libtool autoconf libudev-dev cmake mesa-common-dev freeglut3-dev libxrandr-dev \
+doxygen libxi-dev libopencv-dev automake sublime-text openjdk-6-jdk freeglut3-dev libusb-1.0-0-dev ros-indigo-desktop-full python-catkin-tools \
+python-rosinstall spotify-client  python-catkin-tools xdotool wmctrl beignet-dev opencl-headers subversion python-pip python-dev python3-pip  \
+okular galculator libmatio2 mesa-utils xclip libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler \
+luarocks libprotobuf-dev libprotoc-dev libprotobuf-c0-dev protobuf-c-compiler python-protobuf libhdf5-dev liblmdb-dev
 libleveldb-dev
 wait
 
@@ -60,6 +65,18 @@ wait
 source ~/.bashrc
 wait
 
+printf '\n\n'
+echo "installing pr2 dependencies"
+install ros-indigo-pr2-controllers-msgs ros-indigo-controller-manager ros-indigo-joint-state-controller \
+ros-indigo-pr2-mechanism-diagnostics ros-indigo-control-toolbox ros-indigo-pr2-controller-manager \
+ros-indigo-pr2-mechanism-msgs ros-indigo-control-toolbox ros-indigo-pr2-controller-interface ros-indigo-pr2-head-action\
+ros-indigo-pr2-controller-manager ros-indigo-pr2-hardware-interface ros-indigo-pr2-gripper-action\
+ros-indigo-pr2-mechanism-diagnostics ros-indigo-pr2-mechanism-model ros-indigo-pr2-dashboard-aggregator \
+ros-indigo-pr2-mechanism-msgs ros-indigo-robot-mechanism-controllers ros-indigo-pr2-msgs ros-indigo-pr2-gazebo-plugins \
+libcppunit-1.13-0 libcppunit-dev ros-indigo-bfl  ros-indigo-robot-pose-ekf ros-indigo-joint-trajectory-action \
+ros-indigo-pr2-simulator ros-indigo-pr2-gazebo ros-indigo-pr2-gazebo-plugins ros-indigo-pr2-controller-configuration-gazebo \
+ros-indigo-pr2-controller-configuration
+wait
 
 printf "\n\n installl glxinfo\n\n"
 sudo apt-get install -y
@@ -75,11 +92,12 @@ luarocks install nngraph
 wait
 luarocks install loadcaffe
 wait
+luarocks install cutorch
+wait
 
 printf '\n\n'
 echo "instaling texlive etc"
 cd && sudo apt-get install -y texstudio texlive-latex-extra texlive-bibtex-extra texlive-fonts-recommended texlive-science
-texlive-science
 wait
 
 echo "instaling moderncv dependencies"
