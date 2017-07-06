@@ -50,10 +50,12 @@ okular galculator libmatio2 mesa-utils xclip libprotobuf-dev libleveldb-dev git 
 libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler luarocks \
 libprotobuf-dev libprotoc-dev libprotobuf-c0-dev protobuf-c-compiler \
 python-protobuf libhdf5-dev liblmdb-dev libleveldb-dev ros-kinetic-desktop-full
+wait
 
 echo "Installing Caffe dependencies"
 sudo apt-get install --no-install-recommends libboost-all-dev libatlas-base-dev libgflags-dev \
  libgoogle-glog-dev liblmdb-dev
+ wait
 
  printf '\n\n'
  echo "setting up your catkin workspace"

@@ -86,9 +86,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias search='apt-cache search'
     alias py27on='source activate py27'
     alias py27off='source activate py27off'
-    alias scat='source ~/catkin_ws/devel/setup.bash'
-    alias scr='source ~/crazyflie_ws/devel/setup.bash'
-    alias tb='docker run --rm -it -e "HOST_CW_DIR=${PWD}" -e "CALLING_HOST_NAME=$(hostname)" -e "CALLING_UID"=$UID -e "CALLING_OS"=$(uname) -v ${PWD}:/tb-module -v ${HOME}/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock bitcraze/toolbelt'
 
 
     alias grep='grep --color=auto'
@@ -125,15 +122,29 @@ if ! shopt -oq posix; then
   fi
 fi
 
-source /opt/ros/kinetic/setup.bash
+#source /opt/ros/kinetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
+
+#ROS MASTER Exports
 # export ROS_MASTER_URI=http://192.168.1.6:11311
-# export ROS_HOSTNAME=192.168.1.5
+# export ROS_HOSTNAME=192.168.1.6
+
+#ROS MASTER FOR LOCAL LONNECTIONS
 export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
+
+# CUDA EXPORTS
 export PATH=/usr/local/cuda-8.0.61/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-export LD_LIBRARY_PATH=/usr/local/cuda-8.0.61/lib64:/home/$USER/Documents/mujoco/mjpro150/bin/:/home/$USER/Documents/mujoco/mjpro131/bin${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-8.0.61/lib64:/home/lex/Documents/mujoco/mjpro150/bin:/home/lex/Documents/mujoco//mjpro150/model:/home/lex/Documents/mujoco/mjpro131/bin:/home/lex/Documents/mujoco/mjpro131/model${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/catkin_ws/src/gps:~/catkin_ws/src/gps/gps_agent_pkg
+export PYTHONPATH=~/catkin_ws/src/gps:~/Documents/caffe/python${PYTHONPATH:+:${PYTHONPATH}}
+export CAFFE_ROOT=~/Documents/caffe/build_cudnn
 
 # added by Anaconda2 4.3.1 installer
-export PATH="/home/robotec/anaconda2/bin:$PATH"
+# export PATH="/home/lex/anaconda2/bin:$PATH"
+. /home/lex/torch/install/bin/torch-activate
+
 source ~/crazyflie_ws/devel/setup.bash
+
+# added by Anaconda3 4.3.1 installer
+export PATH="/home/lex/anaconda3/bin:$PATH"
