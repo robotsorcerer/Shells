@@ -93,10 +93,10 @@ sudo apt-get install --no-install-recommends libboost-all-dev libatlas-base-dev 
  sudo sh gitsetup.sh;
  wait
 
- printf '\n instaling anaconda full version\n'
- cd $THIS_DIR
- bash Anaconda3-4.3.1-Linux-x86_64.sh
- wait
+ # printf '\n instaling anaconda full version\n'
+ # cd $THIS_DIR
+ # # bash Anaconda3-4.3.1-Linux-x86_64.sh
+ # wait
 
  printf '\nInstalling pytorch and torchvision\n'
  conda install pytorch torchvision cuda80 -c soumith
