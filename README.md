@@ -32,11 +32,11 @@
 + [packages.sh](/packages.sh)
   + bot used in compiling packages on ubuntu 14.04  
 
-  + [vivid_packages.sh](/vivid_packages.sh)
-    + bot used to manage instalation of packages on ubuntu 15.04 (vivid)
++ [vivid_packages.sh](/vivid_packages.sh)
+  + bot used to manage instalation of packages on ubuntu 15.04 (vivid)
 
-  + [xenial_install.sh](/xenial_install.sh)
-    + customized bot for managing ubuntu 16.04 xenial packages
++ [xenial_install.sh](/xenial_install.sh)
+  + customized bot for managing ubuntu 16.04 xenial packages
 
 + [rename.sh](/rename.sh)
   + bot used in renaming training folders in gps examples
