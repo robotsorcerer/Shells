@@ -27,7 +27,7 @@ is_no() {
                 echo 1
         fi
         }
-disp="/tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY=$DISPLAY"
+disp="-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY=$DISPLAY"
 usb_mode="--privileged -v /dev/bus/usb:/dev/bus/usb"
 
 if [ $(is_yes $usb_resp)  ]  && [  $(is_yes $disp_resp) ]; then
