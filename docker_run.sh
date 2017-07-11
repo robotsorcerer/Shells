@@ -10,9 +10,11 @@ read disp_resp
 echo -e "\nEnter the image and tag name: e.g. \n\t<$USER/repo:tag>\n"
 read repo_tag
 
-#docker run -it --device=/dev/ttyUSB0 repo_tag
 echo -e "\nAre you attaching a usb device? \t [y/n] \n"
 read usb_resp
+
+echo -e "\nAre you attaching the system's gpu? [y|n] \n"
+read gpu_resp
 
 is_yes() {
 	yesses={y,Y,yes,Yes,YES}
@@ -29,10 +31,11 @@ is_no() {
         }
 disp="-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY=$DISPLAY"
 usb_mode="--privileged -v /dev/bus/usb:/dev/bus/usb"
+gpu_mode="--device /dev/nvidia0:/dev/nvidia0 --device /dev/nvidiactl:/dev/nvidiactl --device /dev/nvidia-uvm:/dev/nvidia-uvm"
 
-if [ $(is_yes $usb_resp)  ]  && [  $(is_yes $disp_resp) ]; then
-		echo -e "running 'docker run -ti --rm $disp $usb_mode $repo_tag' "
-		docker run -ti --rm $disp  $usb_mode $repo_tag
+if [ $(is_yes $usb_resp)  ]  && [  $(is_yes $disp_resp) ] && [ $(is_yes $gpu_resp) ]; then
+		echo -e "running 'docker run -ti --rm $disp $usb_mode $repo_tag $gpu_mode' "
+		docker run -ti --rm $disp  $usb_mode  $gpu_mode $repo_tag
 elif [ $(is_yes $usb_resp) ] && [ $(is_no $disp_resp) ]; then
 	echo -e "docker run -it --rm $usb_mode $repo_tag"
         docker run -it --rm $usb_mode $repo_tag
