@@ -32,5 +32,24 @@
 + [packages.sh](/packages.sh)
   + bot used in compiling packages on ubuntu 14.04  
 
-+ [rename.sh](/packages.sh)
-  + bot used in compiling packages on ubuntu 14.04  
+  + [vivid_packages.sh](/vivid_packages.sh)
+    + bot used to manage instalation of packages on ubuntu 15.04 (vivid)
+
+  + [xenial_install.sh](/xenial_install.sh)
+    + customized bot for managing ubuntu 16.04 xenial packages
+
++ [rename.sh](/rename.sh)
+  + bot used in renaming training folders in gps examples
+
++ [png2jpg.sh](/png2jpg.sh)
+  + converts png files to jpg
+
++ [sparseCheckout.sh](/sparseCheckout.sh)
+  + performs [git sparse checkout](http://lakehanne.github.io/git-sparse-checkout)
+
++ [trim_video.sh](/trim_video.sh)
+  + ffmpeg trims a video length as specified by user
+
+
++ [wmv2mp4.sh](/wmv2mp4.sh)
+  + converts wmv files to mp4
