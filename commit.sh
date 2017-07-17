@@ -18,7 +18,7 @@ printf "\nPlease enter the name of the upstream remote\n\nOr type Enter to push 
 read remote
 
 if [ remote == "" ]; then
-   remote=$parse_git_branch()
+   remote=parse_git_branch
 fi
 
 git push -u origin $remote
