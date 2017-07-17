@@ -9,13 +9,16 @@ read msg
 
 git commit -m "$msg"
 
+parse_git_branch() {
+git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'
+}
 
-printf "\nPlease enter the name of the upstream remote\n\nOr type Enter to push to master\n\n "
+printf "\nPlease enter the name of the upstream remote\n\nOr type Enter to push to current branch that you are on\n\n "
 
 read remote
 
 if [ remote == "" ]; then
-   remote=master
+   remote=$parse_git_branch()
 fi
 
 git push -u origin $remote
