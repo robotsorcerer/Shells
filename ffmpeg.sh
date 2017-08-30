@@ -6,9 +6,7 @@
 # wiki:CompilationGuide/Ubuntu
 # https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
 #
-# Author: Olalekan Ogunmolu <<olalekan.ogunmolu@utdallas.edu>>
-# Disclaimer: This script has nothing in conjunction with Amazon 
-# Robotics LLC
+# Author: Olalekan Ogunmolu
 #################################################################
 
 if [[ "$uname" == "Darwin" ]]; then
