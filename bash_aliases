@@ -25,8 +25,8 @@ export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
 
 # CUDA EXPORTS
-export PATH=/usr/local/cuda-8.0.61/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-export LD_LIBRARY_PATH=/usr/local/cuda-8.0.61/lib64:/home/$USER/Documents/mujoco/mjpro150/bin:/home/$USER/Documents/mujoco/mjpro150/model:/home/$USER/Documents/mujoco/mjpro131/bin:/home/$USER/Documents/mujoco/mjpro131/model:~/catkin_ws/src/gps/build/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PATH=/usr/local/cuda-9.0/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro150/model:/home/$USER/mujoco/mjpro131/bin:/home/$USER/mujoco/mjpro131/model:~/catkin_ws/src/gps/build/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export ROS_PACKAGE_PATH=~/catkin_ws/src/gps:~/catkin_ws/src/gps/gps_agent_pkg:~/catkin_ws/src/ral/pyrnn${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
 export PYTHONPATH=~/catkin_ws/src/gps:~/catkin_ws/src/ral/pyrnn:~/Documents/caffe/python:~/catkin_ws/src/gps/build/lib:~/catkin_ws/src/gps/gps_agent_pkg${PYTHONPATH:+:${PYTHONPATH}}
 export CAFFE_ROOT=~/Documents/caffe/build_cudnn
