@@ -33,3 +33,7 @@ export CAFFE_ROOT=~/Documents/caffe/build_cudnn
 
 #source /opt/ros/kinetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
+source /opt/ros/r2b3/setup.bash
+source /opt/ros/r2b3/share/ros2cli/environment/ros2-argcomplete.bash
+
+RMW_IMPLEMENTATION=rmw_opensplice_cpp

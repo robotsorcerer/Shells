@@ -1,55 +1,62 @@
 
-+ [bashrc](/bashrc)
-  + bash run file with custom exports for cuda, mujoco, ros and alias examples
++ [bash_aliases](/bash_aliases)
+  + Contains useful aliases for bourne shell environment
 
-+ [docker_run.sh](/docker_run.sh)
++ [docker_run](/docker_run)
   + Run a docker image in usb privileged mode, display mode, both modes or none
 
-+ [clean.sh](/clean.sh)
-  + used to clean up my latex working directory. cleans out .out, .synctex.gx, .aux files
++ [clean](/clean)
+  + used to clean up latex working directory. cleans out .out, .synctex.gx, .aux files
 
-+ [copy.sh](/copy.sh)
++ [copy](/copy)
   + used in ros workspaces to copy gps experiment iterations to a new directory
 
-+ [cvpatch.sh](/cvpatch.sh)
++ [cvpatch](/cvpatch)
   + deprecated. I used to use this to update my CV
 
-+ [ffmpeg.sh](/ffmpeg.sh)
++ [ffmpeg](/ffmpeg)
   + used to compile ffmpeg from source
 
-+ [gconfig.sh](/gconfig)
++ [gconfig](/gconfig)
   + used to change the default gcc or g++ that update-alternatives uses
 
 + [gimpfu](gimpfu)
   + used in converting xcf files to image png/jpg files
 
-+ [ogv2mp4.sh](/ogv2mp4.sh)
++ [gitsetup](gitsetup)
+  + configures git global properties
+
++ [ogv2mp4](/ogv2mp4)
   + used in converting ogv files to mp4
 
-+ [packages_precise.sh](/packages_precise.sh)
++ [packages_precise](/packages_precise)
   + bot used in compiling packages on ubuntu 12.04
 
-+ [packages.sh](/packages.sh)
++ [packages](/packages)
   + bot used in compiling packages on ubuntu 14.04  
 
-+ [vivid_packages.sh](/vivid_packages.sh)
-  + bot used to manage instalation of packages on ubuntu 15.04 (vivid)
++ [trim_video](/trim_video)
+  + used to trim ffmpeg videos
 
-+ [xenial_install.sh](/xenial_install.sh)
+
++ [vivid_packages](/vivid_packages)
+  + bot used to manage installation of packages on ubuntu 15.04 (vivid)
+
++ [xenial_install](/xenial_install)
   + customized bot for managing ubuntu 16.04 xenial packages
 
-+ [rename.sh](/rename.sh)
++ [rename](/rename)
   + bot used in renaming training folders in gps examples
 
 + [png2jpg.sh](/png2jpg.sh)
   + converts png files to jpg
 
-+ [sparseCheckout.sh](/sparseCheckout.sh)
-  + performs [git sparse checkout](http://lakehanne.github.io/git-sparse-checkout)
++ [sparseCheckout](/sparseCheckout)
+  + performs [git sparse checkout](http://scriptedonachip/blog//git-sparse-checkout)
 
-+ [trim_video.sh](/trim_video.sh)
++ [trim_video](/trim_video)
   + ffmpeg trims a video length as specified by user
 
 
-+ [wmv2mp4.sh](/wmv2mp4.sh)
++ [wmv2mp4](/wmv2mp4)
   + converts wmv files to mp4
