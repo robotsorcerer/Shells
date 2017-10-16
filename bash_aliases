@@ -8,6 +8,8 @@ alias py27on='source activate py27'
 alias py27off='source deactivate py27'
 alias py35on='source activate py35'
 alias py35off='source deactivate py35'
+alias gps='cd ~/catkin_ws/src/gps'
+alias papers='cd ~/Documents/Papers'
 
 # delineate python2.7 from anaconda installs
 alias python2.7='/usr/bin/python2.7'
@@ -36,4 +38,7 @@ source ~/catkin_ws/devel/setup.bash
 source /opt/ros/r2b3/setup.bash
 source /opt/ros/r2b3/share/ros2cli/environment/ros2-argcomplete.bash
 
+RMW_IMPLEMENTATION=rmw_opensplice_cpp
+source /opt/ros/r2b3/setup.bash
+source /opt/ros/r2b3/share/ros2cli/environment/ros2-argcomplete.bash
 RMW_IMPLEMENTATION=rmw_opensplice_cpp
