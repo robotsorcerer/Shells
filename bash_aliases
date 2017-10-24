@@ -11,6 +11,9 @@ alias py35off='source deactivate py35'
 alias gps='cd ~/catkin_ws/src/gps'
 alias papers='cd ~/Documents/Papers'
 alias shells='cd ~/Downloads/shells'
+alias down='cd ~/Downloads'
+alias desk='cd ~/Desktop'
+alias blog='cd ~/Documents/blog'
 
 # delineate python2.7 from anaconda installs
 alias python2.7='/usr/bin/python2.7'
