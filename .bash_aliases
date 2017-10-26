@@ -1,5 +1,5 @@
 alias cm='catkin_make'
-alias cb='catkin build'
+alias cb='catkin build'
 alias jup='jupyter notebook'
 alias update='sudo apt-get update'
 alias install='sudo apt install -y'
@@ -10,10 +10,11 @@ alias py35on='source activate py35'
 alias py35off='source deactivate py35'
 alias gps='cd ~/catkin_ws/src/gps'
 alias papers='cd ~/Documents/Papers'
-alias shells='cd ~/Downloads/shells'
 alias down='cd ~/Downloads'
 alias desk='cd ~/Desktop'
 alias blog='cd ~/Documents/blog'
+alias jup2on='source activate ipykernel_py2'
+alias jup2off='source deactivate ipykernel_py2'
 
 # delineate python2.7 from anaconda installs
 alias python2.7='/usr/bin/python2.7'
@@ -46,11 +47,3 @@ RMW_IMPLEMENTATION=rmw_opensplice_cpp
 source /opt/ros/r2b3/setup.bash
 source /opt/ros/r2b3/share/ros2cli/environment/ros2-argcomplete.bash
 RMW_IMPLEMENTATION=rmw_opensplice_cpp
-
-if [ -d /home/$USER/anaconda2/bin ]; then
-  export PATH="/home/$USER/anaconda2/bin:${PATH:+:${PATH}}"
-elif [ -d "/home/$USER/anaconda3/bin"]; then
-  export PATH="/home/$USER/anaconda3/bin:${PATH:+:${PATH}}"
-else
-  echo "Those anaconda paths do not exist. Please amend your path variable manually."
-fi
