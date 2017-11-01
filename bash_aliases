@@ -1,5 +1,5 @@
 alias cm='catkin_make'
-alias cb='catkin build'
+alias cb='catkin build'
 alias jup='jupyter notebook'
 alias update='sudo apt-get update'
 alias install='sudo apt install -y'
@@ -14,6 +14,8 @@ alias shells='cd ~/Downloads/shells'
 alias down='cd ~/Downloads'
 alias desk='cd ~/Desktop'
 alias blog='cd ~/Documents/blog'
+alias schol='cd ~/Desktop/scholternships'
+alias shell='cd ~/Downloads/shells'
 
 # delineate python2.7 from anaconda installs
 alias python2.7='/usr/bin/python2.7'
