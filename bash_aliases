@@ -51,7 +51,7 @@ RMW_IMPLEMENTATION=rmw_opensplice_cpp
 
 if [ -d /home/$USER/anaconda2/bin ]; then
   export PATH="/home/$USER/anaconda2/bin:${PATH:+:${PATH}}"
-elif [ -d "/home/$USER/anaconda3/bin"]; then
+elif [ -d /home/$USER/anaconda3/bin ]; then
   export PATH="/home/$USER/anaconda3/bin:${PATH:+:${PATH}}"
 else
   echo "Those anaconda paths do not exist. Please amend your path variable manually."
