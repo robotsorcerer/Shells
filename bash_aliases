@@ -25,6 +25,9 @@ export TEXINPUTS=/home/$USER/Documents/pgfplots/tex//:
 export TEXINPUTS=/home/$USER/Documents/pgfplots/doc//:
 export LUAINPUTS=/home/$USER/Documents/pgfplots//:
 
+export INFOPATH=$INFOPATH:/usr/local/texlive/2017/texmf-dist/doc/info
+export MANPATH=$MANPATH:/usr/local/texlive/2017/texmf-dist/doc/man
+
 #ROS MASTER Exports
 #export ROS_MASTER_URI=http://172.17.0.2:11311
 #export ROS_HOSTNAME=192.168.1.7
@@ -34,7 +37,8 @@ export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
 
 # CUDA EXPORTS
-export PATH=/usr/local/cuda-9.0/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+export PATH=/usr/local/cuda-9.0/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/texlive/2017/bin/x86_64-linux:${PATH}
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro150/model:/home/$USER/mujoco/mjpro131/bin:/home/$USER/mujoco/mjpro131/model:~/catkin_ws/src/gps/build/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export ROS_PACKAGE_PATH=~/catkin_ws/src/gps:~/catkin_ws/src/gps/gps_agent_pkg:~/catkin_ws/src/ral/pyrnn${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
 export PYTHONPATH=~/catkin_ws/src/gps:~/catkin_ws/src/ral/pyrnn:~/Documents/caffe/python:~/catkin_ws/src/gps/build/lib:~/catkin_ws/src/gps/gps_agent_pkg${PYTHONPATH:+:${PYTHONPATH}}
