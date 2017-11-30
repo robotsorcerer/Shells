@@ -99,15 +99,7 @@ wait
 luarocks install cutorch
 wait
 
-printf '\n\n'
-echo "instaling texlive etc"
-cd && sudo apt-get install -y texstudio texlive-latex-extra texlive-bibtex-extra texlive-fonts-recommended texlive-science
-wait
 
-echo "instaling moderncv dependencies"
-sudo mktexlsr
-wait
-pytorch
 printf '\n\n'
 echo "setting up git global configurations"
 cd ~/Downloads/Shells ;
@@ -123,6 +115,36 @@ bash Anaconda3-4.3.1-Linux-x86_64.sh
 
 printf '\nInstalling pytorch and torchvision\n'
 conda install pytorch torchvision cuda80 -c soumith
+wait
+
+printf '\n\n'
+echo "instaling texlive etc"
+# https://tex.stackexchange.com/questions/1092/how-to-install-vanilla-texlive-on-debian-or-ubuntu/95373#95373
+# cd && sudo apt-get install -y texstudio texlive-latex-extra texlive-bibtex-extra texlive-fonts-recommended texlive-science
+sudo apt install wget gksu perl-tk
+wait
+
+curl http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xzf
+cd install-tl-20170102 && sudo ./install-tl
+wait
+
+echo -e "making Ubuntu think you've installed TeX Live"
+sudo apt install equivs --no-install-recommends
+mkdir -p /tmp/tl-equivs && cd /tmp/tl-equivs &&  equivs-control texlive-local
+wait
+wget -O texlive-local http://www.tug.org/texlive/files/debian-equivs-2016-ex.txt
+
+echo -e "Now building the package and installing"
+equivs-build texlive-local
+sudo dpkg -i texlive-local_2016-2_all.deb
+sudo apt install -f
+
+echo -e "continue the tex installation by following instructions here\n\n
+				https://tex.stackexchange.com/questions/1092/how-to-install-vanilla-texlive-on-debian-or-ubuntu/95373#95373\n\n
+				"
+
+echo "instaling moderncv dependencies"
+sudo mktexlsr
 wait
 
 printf '\n\n'

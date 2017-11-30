@@ -25,6 +25,9 @@ export TEXINPUTS=/home/$USER/Documents/pgfplots/tex//:
 export TEXINPUTS=/home/$USER/Documents/pgfplots/doc//:
 export LUAINPUTS=/home/$USER/Documents/pgfplots//:
 
+export INFOPATH=$INFOPATH:/usr/local/texlive/2017/texmf-dist/doc/info
+export MANPATH=$MANPATH:/usr/local/texlive/2017/texmf-dist/doc/man
+
 #ROS MASTER Exports
 #export ROS_MASTER_URI=http://172.17.0.2:11311
 #export ROS_HOSTNAME=192.168.1.7

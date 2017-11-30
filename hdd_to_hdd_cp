@@ -1,0 +1,5 @@
+#! /bin/bash
+
+# from https://unix.stackexchange.com/questions/144172/full-dd-copy-from-hdd-to-hdd
+
+sudo sh -c 'cat /dev/sda > /dev/sdb'
