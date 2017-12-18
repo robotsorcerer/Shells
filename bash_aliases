@@ -17,6 +17,7 @@ alias doc='cd ~/Documents'
 alias blog='cd ~/Documents/blog'
 alias schol='cd ~/Desktop/scholternships'
 alias shell='cd ~/Downloads/shells'
+alias oncol='cd ~/Documents/NNs/RadOncol'
 
 # delineate python2.7 from anaconda installs
 alias python2.7='/usr/bin/python2.7'
@@ -24,9 +25,6 @@ alias python2.7='/usr/bin/python2.7'
 export TEXINPUTS=/home/$USER/Documents/pgfplots/tex//:
 export TEXINPUTS=/home/$USER/Documents/pgfplots/doc//:
 export LUAINPUTS=/home/$USER/Documents/pgfplots//:
-
-export INFOPATH=$INFOPATH:/usr/local/texlive/2017/texmf-dist/doc/info
-export MANPATH=$MANPATH:/usr/local/texlive/2017/texmf-dist/doc/man
 
 #ROS MASTER Exports
 #export ROS_MASTER_URI=http://172.17.0.2:11311
@@ -38,10 +36,10 @@ export ROS_HOSTNAME=localhost
 
 # CUDA EXPORTS
 export PATH=/usr/local/cuda-9.0/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro131/bin:~/Documents/NNs/radoncol/beam_optim/build/lib:~/catkin_ws/src/gps/build/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro131/bin:~/Documents/NNs/radoncol/beam_optim/build/lib:~/catkin_ws/src/gps/build/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+# /home/lex/anaconda3/lib
 export ROS_PACKAGE_PATH=~/catkin_ws/src/gps:~/catkin_ws/src/gps/gps_agent_pkg:~/catkin_ws/src/ral/pyrnn${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
-export PYTHONPATH=~/Documents/NNs/radoncol/beam_optim/build/lib:~/Documents/NNs/radoncol/prepro_dicoms/rt5py:~/catkin_ws/src/gps:~/catkin_ws/src/ral/pyrnn:~/Documents/caffe/python:~/catkin_ws/src/gps/build/lib:~/catkin_ws/src/gps/gps_agent_pkg${PYTHONPATH:+:${PYTHONPATH}}y
-
+export PYTHONPATH=~/Documents/NNs/radoncol/beam_optim/build/lib:~/Documents/NNs/radoncol/prepro_dicoms/rt5py:~/catkin_ws/src/gps:~/catkin_ws/src/ral/pyrnn:~/Documents/caffe/python:~/catkin_ws/src/gps/build/lib:~/catkin_ws/src/gps/gps_agent_pkg${PYTHONPATH:+:${PYTHONPATH}}
 export CAFFE_ROOT=~/Documents/caffe/build_cudnn
 
 #source /opt/ros/kinetic/setup.bash
@@ -59,5 +57,5 @@ if [ -d /home/$USER/anaconda2/bin ]; then
 elif [ -d /home/$USER/anaconda3/bin ]; then
   export PATH="/home/$USER/anaconda3/bin:${PATH:+:${PATH}}"
 else
-  echo "Those anaconda paths do not exist. Please amend your path variable manually."
+  echo "Could not find an anaconda path. Please amend your path variable manually."
 fi
