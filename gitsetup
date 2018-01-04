@@ -4,6 +4,7 @@ git config --global user.name lakehanne
 git config --global user.email patlekano@gmail.com
 git config --global core.editor sublime-text
 git config --list			# will display the above info in terminal
+git config --global http.proxy http://swmed.proxy.edu:3128
 
 printf '\n\n Cache the password\n\n'
 git config --global credential.helper cache
