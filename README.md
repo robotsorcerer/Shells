@@ -11,8 +11,11 @@
 + [copy](/copy)
   + used in ros workspaces to copy gps experiment iterations to a new directory
 
++ [cut_trim](/cut_trim.sh)
+  + speeds up a video and truncates the video to the time length specified
+
 + [cvpatch](/cvpatch)
-  + deprecated. I used to use this to update my CV
+  + deprecated. used to update my CV
 
 + [ffmpeg](/ffmpeg)
   + used to compile ffmpeg from source
