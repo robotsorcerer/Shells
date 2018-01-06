@@ -4,8 +4,8 @@
 #Use this script for a basic packages installation after a dry format of ubuntu 14.04.2 LTS
 #creates most of the packages needful for the average engineer
 
-export http_proxy=http://proxy.swmed.edu:3128
-export https_proxy=http://proxy.swmed.edu:3128
+#export http_proxy=http://proxy.swmed.edu:3128
+#export https_proxy=http://proxy.swmed.edu:3128
 
 echo "setting up sources for ros indigo"
 printf '\n'
@@ -55,6 +55,7 @@ cd ~/catkin_ws/src;
 catkin init;
 wait
 cd ../; catkin build
+wait
 
 printf '\n\n'
 echo "Initializing rosdep"
@@ -71,33 +72,33 @@ wait
 
 printf '\n\n'
 echo "installing pr2 dependencies"
-install ros-indigo-pr2-controllers-msgs ros-indigo-controller-manager ros-indigo-joint-state-controller \
-ros-indigo-pr2-mechanism-diagnostics ros-indigo-control-toolbox ros-indigo-pr2-controller-manager \
-ros-indigo-pr2-mechanism-msgs ros-indigo-control-toolbox ros-indigo-pr2-controller-interface ros-indigo-pr2-head-action\
-ros-indigo-pr2-controller-manager ros-indigo-pr2-hardware-interface ros-indigo-pr2-gripper-action\
-ros-indigo-pr2-mechanism-diagnostics ros-indigo-pr2-mechanism-model ros-indigo-pr2-dashboard-aggregator \
-ros-indigo-pr2-mechanism-msgs ros-indigo-robot-mechanism-controllers ros-indigo-pr2-msgs ros-indigo-pr2-gazebo-plugins \
-libcppunit-1.13-0 libcppunit-dev ros-indigo-bfl  ros-indigo-robot-pose-ekf ros-indigo-joint-trajectory-action \
-ros-indigo-pr2-simulator ros-indigo-pr2-gazebo ros-indigo-pr2-gazebo-plugins ros-indigo-pr2-controller-configuration-gazebo \
-ros-indigo-pr2-controller-configuration
-wait
+#install ros-indigo-pr2-controllers-msgs ros-indigo-controller-manager ros-indigo-joint-state-controller \
+#ros-indigo-pr2-mechanism-diagnostics ros-indigo-control-toolbox ros-indigo-pr2-controller-manager \
+#ros-indigo-pr2-mechanism-msgs ros-indigo-control-toolbox ros-indigo-pr2-controller-interface ros-indigo-pr2-head-action\
+#ros-indigo-pr2-controller-manager ros-indigo-pr2-hardware-interface ros-indigo-pr2-gripper-action\
+#ros-indigo-pr2-mechanism-diagnostics ros-indigo-pr2-mechanism-model ros-indigo-pr2-dashboard-aggregator \
+#ros-indigo-pr2-mechanism-msgs ros-indigo-robot-mechanism-controllers ros-indigo-pr2-msgs ros-indigo-pr2-gazebo-plugins \
+#libcppunit-1.13-0 libcppunit-dev ros-indigo-bfl  ros-indigo-robot-pose-ekf ros-indigo-joint-trajectory-action \
+#ros-indigo-pr2-simulator ros-indigo-pr2-gazebo ros-indigo-pr2-gazebo-plugins ros-indigo-pr2-controller-configuration-gazebo \
+#ros-indigo-pr2-controller-configuration
+#wait
 
 printf "\n\n installl glxinfo\n\n"
 sudo apt-get install -y
 wait
 
-luarocks install nn
-wait
-luarocks install cunn
-wait
-luarocks install image
-wait
-luarocks install nngraph
-wait
-luarocks install loadcaffe
-wait
-luarocks install cutorch
-wait
+#luarocks install nn
+#wait
+#luarocks install cunn
+#wait
+#luarocks install image
+#wait
+#luarocks install nngraph
+#wait
+#luarocks install loadcaffe
+#wait
+#luarocks install cutorch
+#wait
 
 
 printf '\n\n'
@@ -108,19 +109,19 @@ sudo sh gitsetup.sh;
 wait
 
 printf '\n instaling anaconda full version\n'
-wget https://repo.continuum.io/archive/Anaconda3-4.3.1-Linux-x86_64.sh
-wait
-bash Anaconda3-4.3.1-Linux-x86_64.sh
+#wget https://repo.continuum.io/archive/Anaconda3-4.3.1-Linux-x86_64.sh
+#wait
+#bash Anaconda3-4.3.1-Linux-x86_64.sh
 
 
-printf '\nInstalling pytorch and torchvision\n'
-conda install pytorch torchvision cuda80 -c soumith
-wait
+#printf '\nInstalling pytorch and torchvision\n'
+#conda install pytorch torchvision cuda80 -c soumith
+#wait
 
 printf '\n\n'
 echo "instaling texlive etc"
 # https://tex.stackexchange.com/questions/1092/how-to-install-vanilla-texlive-on-debian-or-ubuntu/95373#95373
-# cd && sudo apt-get install -y texstudio texlive-latex-extra texlive-bibtex-extra texlive-fonts-recommended texlive-science
+cd && sudo apt-get install -y texstudio texlive-latex-extra texlive-bibtex-extra texlive-fonts-recommended texlive-science
 sudo apt install wget gksu perl-tk
 wait
 
@@ -146,6 +147,8 @@ echo -e "continue the tex installation by following instructions here\n\n
 echo "instaling moderncv dependencies"
 sudo mktexlsr
 wait
+
+sudo apt-get install libnss3
 
 printf '\n\n'
 echo "Dynamically linking all files, packages and dependencies, please wait"
