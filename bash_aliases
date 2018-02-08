@@ -53,9 +53,9 @@ source /opt/ros/r2b3/share/ros2cli/environment/ros2-argcomplete.bash
 RMW_IMPLEMENTATION=rmw_opensplice_cpp
 
 if [ -d /home/$USER/anaconda2/bin ]; then
-  export PATH="/home/$USER/anaconda2/bin:${PATH:+:${PATH}}"
+  export PATH="/home/$USER/anaconda2/bin${PATH:+:${PATH}}"
 elif [ -d /home/$USER/anaconda3/bin ]; then
-  export PATH="/home/$USER/anaconda3/bin:${PATH:+:${PATH}}"
+  export PATH="/home/$USER/anaconda3/bin${PATH:+:${PATH}}"
 else
   echo "Could not find an anaconda path. Please amend your path variable manually."
 fi
