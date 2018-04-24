@@ -19,7 +19,12 @@ alias doc='cd ~/Documents'
 alias blog='cd ~/Documents/blog'
 alias schol='cd ~/Desktop/scholternships'
 alias shell='cd ~/Downloads/shells'
+alias mounttdrive='sudo mount.cifs //mrocfs.utmroc.swmed.org/mrocdata/ /home/lex/mount/tdrive/ -o rw,username=s179161,domain=utmroc,uid=1000,gid=1000'
+alias mounttdrivemyne='sudo mount.cifs //mrocfs.utmroc.swmed.org/mrocdata/Phys Research/Users/Lekan /home/lex/mount/tdrive/ -o rw,username=s179161,domain=utmroc,uid=1000,gid=1000'
+alias tdrive='cd "/home/lex/mount/tdrive/Phys Research/Users/Lekan"'
+alias tdrivemyne='cd "/home/lex/tdrive"'
 alias oncol='cd ~/Documents/NNs/RadOncol'
+alias rok80='ssh -X lekan@rok80x8.dhcp.swmed.org'
 
 # delineate python2.7 from anaconda installs
 alias python2.7='/usr/bin/python2.7'
