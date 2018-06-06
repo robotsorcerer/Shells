@@ -25,6 +25,7 @@ alias mountudrive='sudo mount.cifs //mrocfs.utmroc.swmed.org/home/S179161/ /home
 #alias tdrive='cd "/home/lex/mount/tdrive/Phys Research/Users/Lekan"'
 alias tdrive='cd "/home/lex/tdrive"'
 alias udrive='cd "/home/lex/udrive"'
+alias swmed='ssh -X lex@129.112.133.210'
 
 alias oncol='cd ~/Documents/NNs/RadOncol'
 alias scr='cd ~/Documents/NNs/RadOncol/beam_optim/scripts'
