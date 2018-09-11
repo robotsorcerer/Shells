@@ -23,11 +23,22 @@ alias oncol='cd ~/Documents/NNs/RadOncol'
 alias juniper='sudo openconnect --juniper --user s179161 utswra.swmed.edu'
 alias utd='sudo openconnect  --user opo140030 vpn.utdallas.edu'
 alias swmed='ssh -X lex@129.112.133.210'
+alias mounttdrive='sudo mount.cifs //mrocfs.utmroc.swmed.org/mrocdata/ /home/lex/mount/tdrive/ -o rw,username=s179161,domain=utmroc,uid=1000,gid=1000'
+#alias mounttdrive="sudo mount.cifs '//mrocfs.utmroc.swmed.org/mrocdata/Phys Research/Users/Lekan' /home/lex/tdrive/ -o rw,username=s179161,domain=utmroc,uid=1000,gid=1000"
+alias mountudrive='sudo mount.cifs //mrocfs.utmroc.swmed.org/home/S179161/ /home/lex/udrive/ -o rw,username=s179161,domain=utmroc,uid=1000,gid=1000'
+#alias tdrive='cd "/home/lex/mount/tdrive/Phys Research/Users/Lekan"'
+alias tdrive='cd "/home/lex/tdrive"'
+alias udrive='cd "/home/lex/udrive"'
+alias swmed='ssh -X lex@129.112.133.210'
+
+alias oncol='cd ~/Documents/NNs/RadOncol'
+alias scr='cd ~/Documents/NNs/RadOncol/beam_optim/scripts'
 alias rok80='ssh -X lekan@rok80x8.dhcp.swmed.org'
 alias tdrive='cd "/home/lekan/mount/tdrive/Phys Research/Users/Lekan"'
 alias torup='roslaunch toroboarm_seven_bringup bringup_real.launch'
 alias torik='roslaunch torobo_ik torobo.launch'
 alias torgaz='roslaunch toroboarm_seven_gazebo toroboarm_world.launch pause:=true'
+
 
 # delineate python2.7 from anaconda installs
 alias python2.7='/usr/bin/python2.7'
@@ -54,6 +65,11 @@ export CAFFE_ROOT=~/Documents/caffe/build_cudnn
 
 source /opt/ros/kinetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
+export CAFFE_ROOT=~/Documents/caffe/build_cudnn
+#export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim/build/lib:~/Documents/NNs/RadOncol/prepro_dicoms/rt5py:~/catkin_ws/src/gps:~/Documents/caffe/python:~/catkin_ws/src/gps/build/lib:~/catkin_ws/src/gps/gps_agent_pkg${PYTHONPATH:+:${PYTHONPATH}}
+export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim:~/Documents/NNs/RadOncol/beam_optim/scripts${PYTHONPATH:+:${PYTHONPATH}}
+#source /opt/ros/kinetic/setup.bash
+#source ~/catkin_ws/devel/setup.bash
 #source /opt/ros/r2b3/setup.bash
 #source /opt/ros/r2b3/share/ros2cli/environment/ros2-argcomplete.bash
 
