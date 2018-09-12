@@ -56,13 +56,15 @@ export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
 
 # CUDA EXPORTS
-export PATH=/usr/local/cuda-9.0/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+export PATH=/usr/local/cuda-9.0/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/opt/gettext/bin:/usr/local/opt/openssl/bin:${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro131/bin:~/Documents/NNs/radoncol/beam_optim/build/lib:~/catkin_ws/src/gps/build/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 # /home/lex/anaconda3/lib
 export ROS_PACKAGE_PATH=~/catkin_ws/src/gps:~/catkin_ws/src/gps/gps_agent_pkg:~/catkin_ws/src/ral/pyrnn${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
 export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim/:~/Documents/NNs/RadOncol:~/catkin_ws/src/gps:~/Documents/caffe/python:~/catkin_ws/src/gps/build/lib:~/catkin_ws/src/gps/gps_agent_pkg:/home/lex/Documents/NNs/RadOncol${PYTHONPATH:+:${PYTHONPATH}}
 export CAFFE_ROOT=~/Documents/caffe/build_cudnn
 
+export LDFLAGS="-L/usr/local/opt/gettext/lib:-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/gettext/include:-I/usr/local/opt/openssl/include"
 source /opt/ros/kinetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
 export CAFFE_ROOT=~/Documents/caffe/build_cudnn
