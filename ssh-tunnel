@@ -1,0 +1,15 @@
+#! /bin/bash
+
+printf "\nHello "$USER". To start your ssh tunnel, please enter the remote user: "
+read remoteuser
+
+printf "\n\nNow enter the remote ip: "
+read remote_host_ip
+
+printf "\nPlease enter the port to use for ssh port forwarding [a four digit number]: "
+read port
+
+printf "\n\nbinding localhost:$port to $remoteuser@$remote_host_ip\n\n"
+ssh -N -f -L localhost:$port:localhost:$port $remoteuser@$remote_host_ip
+
+echo -e "Done. Thanks!"
