@@ -1,15 +1,22 @@
 #! /bin/bash
 
-printf "\nHello "$USER". To start your ssh tunnel, please enter the remote user: "
+printf "\nHello "$USER". To start your ssh tunnel, \nplease enter the remote user and ip address\ne.g. as lekan@rok80x8.dhcp.swmed.org \n(if logging on to rok80, just hit the [RETURN] key): "
 read remoteuser
 
-printf "\n\nNow enter the remote ip: "
-read remote_host_ip
+if [ remoteuser=="" ]; then
+    export remoteuser="lekan@rok80x8.dhcp.swmed.org"
+fi
 
-printf "\nPlease enter the port to use for ssh port forwarding [a four digit number]: "
+echo -e "\n\nyou have chosen $remoteuser as user@ip\n\n"
+
+printf "\nPlease enter the port to use for ssh port forwarding [a four digit number]\n(if you would like to use "6140", just hit the [RETURN] key): "
 read port
 
-printf "\n\nbinding localhost:$port to $remoteuser@$remote_host_ip\n\n"
-ssh -N -f -L localhost:$port:localhost:$port $remoteuser@$remote_host_ip
+if [ port=="" ]; then
+    export port="6140"
+fi
 
-echo -e "Done. Thanks!"
+printf "\n\nbinding localhost:$port to "$remoteuser"\n\n"
+ssh -N -f -L localhost:$port:localhost:$port $remoteuser
+
+echo -e "Done. \nYou may now type localhost:$port/lab? in your favorite browser. \n\nThanks!\n"
