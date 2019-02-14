@@ -3,17 +3,17 @@
 printf "\nHello "$USER". To start your ssh tunnel, \nplease enter the remote user and ip address\ne.g. as lekan@rok80x8.dhcp.swmed.org \n(if logging on to rok80, just hit the [RETURN] key): "
 read remoteuser
 
-if [ remoteuser=="" ]; then
-    export remoteuser="lekan@rok80x8.dhcp.swmed.org"
+if [ remoteuser == "" ]; then
+    remoteuser="lekan@rok80x8.dhcp.swmed.org"
 fi
 
-echo -e "\n\nyou have chosen $remoteuser as user@ip\n\n"
+echo -e "\n\nyou have chosen $remoteuser as user@ip-address\n\n"
 
 printf "\nPlease enter the port to use for ssh port forwarding [a four digit number]\n(if you would like to use "6140", just hit the [RETURN] key): "
 read port
 
-if [ port=="" ]; then
-    export port="6140"
+if [ port == "" ]; then
+    port="6140"
 fi
 
 printf "\n\nbinding localhost:$port to "$remoteuser"\n\n"
