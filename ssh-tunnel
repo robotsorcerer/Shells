@@ -1,13 +1,39 @@
 #! /bin/bash
 
-printf "\nHello "$USER". To start your ssh tunnel, \nplease enter the remote user and ip address\ne.g. as lekan@rok80x8.dhcp.swmed.org \n(if logging on to rok80, just hit the [RETURN] key): "
-read remoteuser
+printf "\nHello "$USER". To start your ssh tunnel, 
+		\nplease enter the machinename, e.g\n\"rok80\" or \"swmed\"\n\n"
 
-if [ remoteuser == "" ]; then
-    remoteuser="lekan@rok80x8.dhcp.swmed.org"
+# # \ne.g. as lekan@rok80x8.dhcp.swmed.org 
+# \n(if logging on to rok80, just hit the [RETURN] key): 
+
+hosts=("lekan@rok80x8.dhcp.swmed.org" "lex@129.112.133.210")
+read computer
+
+is_rok80(){
+	rok80s={rok80,ROK80,Rok80,rOK80}
+	if [[ $rok80s =~ $1 ]]; then
+		echo 1
+	fi
+}
+
+is_swmed(){
+	swmed={swmed,utsw,SWMED,UTSW,bl11,BL11}
+	if [[ $swmed =~ $1 ]]; then
+		echo 1
+	fi
+}
+
+if [[ $(is_rok80 $computer) ]]; then
+    remotecomp=${hosts[0]}
+elif [[ $(is_swmed $computer) ]]; then
+    remotecomp=${hosts[1]}
+else
+	echo -e "\n\nYou have selected an invalid remote computer\n
+			Only swmed and rok80 are valid for now"
+	exit 0
 fi
 
-echo -e "\n\nyou have chosen $remoteuser as user@ip-address\n\n"
+echo -e "\n\nyou have chosen $remotecomp\n\n"
 
 printf "\nPlease enter the port to use for ssh port forwarding [a four digit number]\n(if you would like to use "6140", just hit the [RETURN] key): "
 read port
@@ -16,7 +42,7 @@ if [ port == "" ]; then
     port="6140"
 fi
 
-printf "\n\nbinding localhost:$port to "$remoteuser"\n\n"
-ssh -N -f -L localhost:$port:localhost:$port $remoteuser
+printf "\n\nbinding localhost:$port to "$remotecomp"\n\n"
+ssh -N -f -L localhost:$port:localhost:$port $remotecomp
 
 echo -e "Done. \nYou may now type localhost:$port/lab? in your favorite browser. \n\nThanks!\n"
