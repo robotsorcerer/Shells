@@ -1,5 +1,5 @@
 alias giant='ssh opo140030@giant.utdallas.edu'
-lias cm='catkin_make'
+alias cm='catkin_make'
 alias cb='catkin build'
 alias ctkn='cd ~/catkin_ws'
 alias jup='jupyter notebook'
@@ -9,8 +9,8 @@ alias install='sudo apt install -y'
 alias search='apt-cache search'
 alias 27='source activate py27'
 alias 27off='source deactivate py27'
-alias 35='source activate py35'
-alias 35off='source deactivate py35'
+alias 35='source activate 35'
+alias 35off='source deactivate 35'
 alias gps='cd ~/catkin_ws/src/gps'
 alias papers='cd ~/Documents/Papers'
 alias shells='cd ~/Downloads/shells'
@@ -20,7 +20,7 @@ alias doc='cd ~/Documents'
 alias blog='cd ~/Documents/blog'
 alias schol='cd ~/Desktop/scholternships'
 alias shell='cd ~/Downloads/shells'
-alias oncol='cd ~/Documents/NNs/RadOncol'
+alias oncol='cd ~/Documents/NNs/deep-boo'
 alias utsw='sudo openconnect --juniper --user s179161 utswra.swmed.edu'
 alias utd='sudo openconnect  --user opo140030 vpn.utdallas.edu'
 alias swmed='ssh -X lex@129.112.133.210'
@@ -31,9 +31,8 @@ alias mountudrive='sudo mount.cifs //mrocfs.utmroc.swmed.org/home/S179161/ /home
 alias tdrive='cd "/home/lex/tdrive"'
 alias udrive='cd "/home/lex/udrive"'
 alias swmed='ssh -X lex@129.112.133.210'
-
-alias oncol='cd ~/Documents/NNs/RadOncol'
-alias scr='cd ~/Documents/NNs/RadOncol/beam_optim/scripts'
+alias utddell='ssh -X lex@10.169.42.133' 
+alias scr='cd ~/Documents/NNs/deep-boo/beam_optim/scripts'
 alias rok80='ssh -X lekan@rok80x8.dhcp.swmed.org'
 alias tdrive='cd "/home/lekan/mount/tdrive/Phys Research/Users/Lekan"'
 alias torup='roslaunch toroboarm_seven_bringup bringup_real.launch'
@@ -57,7 +56,7 @@ export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
 
 # CUDA EXPORTS
-export PATH=/usr/local/cuda-9.0/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/opt/gettext/bin:/usr/local/opt/openssl/bin:${PATH:+:${PATH}}
+export PATH=/usr/local/cuda-9.0/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/opt/gettext/bin:/usr/local/opt/openssl/bin:$HOME/gems/bin:${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro131/bin:~/Documents/NNs/radoncol/beam_optim/build/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim/:~/Documents/NNs/RadOncol:~/Documents/caffe/python:/home/lex/Documents/NNs/RadOncol${PYTHONPATH:+:${PYTHONPATH}}
 export CAFFE_ROOT=~/Documents/caffe/build_cudnn
@@ -68,13 +67,13 @@ export CAFFE_ROOT=~/Documents/caffe/build_cudnn
 #export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim/build/lib:~/Documents/NNs/RadOncol/prepro_dicoms/rt5py:~/Documents/caffe/python:${PYTHONPATH:+:${PYTHONPATH}}
 export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim:~/Documents/NNs/RadOncol/beam_optim/scripts${PYTHONPATH:+:${PYTHONPATH}}
 
-#if [ -d /home/$USER/anaconda2/bin ]; then
-#  export PATH="/home/$USER/anaconda2/bin:${PATH:+:${PATH}}"
-#elif [ -d /home/$USER/anaconda3/bin ]; then
-#  export PATH="/home/$USER/anaconda3/bin:${PATH:+:${PATH}}"
-#else
-#  echo "Could not find an anaconda path. Please amend your path variable manually."
-#fi
+if [ -d ~/anaconda2/bin ]; then
+  export PATH="~/anaconda2/bin:${PATH:+:${PATH}}"
+elif [ -d ~/anaconda3/bin ]; then
+  export PATH="~/anaconda3/bin:${PATH:+:${PATH}}"
+else
+  echo "Could not find an anaconda path. Please amend your path variable manually."
+fi
 
 
 # http_proxy=http://proxy.swmed.edu:3128
@@ -90,8 +89,6 @@ export CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES=1024x768
 
 # Install Ruby Gems to ~/gems
 export GEM_HOME=$HOME/gems
-export PATH=$HOME/gems/bin:$PATH
-alias rok80='ssh -X lekan@rok80x8.dhcp.swmed.org'
 source ~/.iterm2_shell_integration.bash
 export NDDSHOME=/Applications/rti_connext_dds-5.3.1
 export OSPL_HOME=/Users/lex/ros2_install/ros2-osx/HDE
