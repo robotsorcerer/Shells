@@ -1,3 +1,4 @@
 
 #!/bin/bash
-rm *.{out,aux,log,blg,nav,gz,vrb,snm,toc}
+rm *.{out,aux,log,lot,brf,lof,blg,nav,gz,vrb,snm,toc}
+

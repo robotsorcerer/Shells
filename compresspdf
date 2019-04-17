@@ -1,0 +1,16 @@
+#! /bin/bash
+
+
+printf "\nHello "$USER". Please enter the name of the input file to compress: \n\n"
+
+read input
+
+print "Please enter the name of the output file\n\n"
+
+read output
+
+echo -e "Hold on while we compress."
+
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$input $output
+
+mv $output $input
