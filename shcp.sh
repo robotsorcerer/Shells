@@ -4,7 +4,7 @@ printf '\n\nEnter Directory to copy from on local machine\n\n'
 
 read from
 
-printf '\n\nEnter Directory to copy from to on rok80 machine\n\n'
+printf '\n\nEnter Directory to copy from to on remote machine\n\n'
 
 read to
 
@@ -28,7 +28,7 @@ is_no() {
         }
 
 if [ $(is_yes $answer)  ]; then
-	scp -r $from  lekan@rok80x8.dhcp.swmed.org:$to
+	scp -r $from  pi@205.208.91.240:$to
 else
 	echo -e "command not understood"
 fi   

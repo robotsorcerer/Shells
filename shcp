@@ -1,0 +1,81 @@
+#! /bin/bash
+
+all_compus="{LekanOffice|piBerry|lexBerry|linuxWiersma}"
+hosts=("Lekan@205.208.91.159" "pi@205.208.91.240" "lex@205.208.91.240" "lex205.208.91.38")
+echo -e "\n\nWhat computer are you copying from?\nChoose one among $all_compus:\n\n"
+read computer
+
+is_lekOffice(){
+	lekOffice={LekanOffice,lekanOffice,lekanoffice}
+	if [[ $lekanOffice = ~$1 ]]; then
+		echo 1
+	fi
+}
+
+is_piBerry(){
+	piBerry={piBerry,PiBerry,piberry}
+	if [[ $piBerry = ~$1 ]]; then
+		echo 1
+	fi
+}
+
+is_lexBerry(){
+	lexBerry={lexBerry,LexBerry,lexberry}
+	if [[ $lexBerry = ~$1 ]]; then
+		echo 1
+	fi
+}
+
+is_linuxWiersma(){
+	linuxWiersma={linuxWiersma,LinuxWiersma,linuxwiersma}
+	if [[ $linuxWiersma = ~$1 ]]; then
+		echo 1
+	fi
+}
+
+if [[ ($is_lekOffice $computer) ]]; then
+		remotecomp=${hosts[0]}
+	elif [[ ($is_piBerry $computer) ]]; then
+			remotecomp=${hosts[1]}
+	elif [[ ($is_lexBerry $computer) ]]; then
+			remotecomp=${hosts[2]}
+	elif [[ ($is_linuxWiersma $computer) ]]; then
+			remotecomp=${hosts[3]}
+	else
+		echo -e "\n\nYou have selected an invalid remote computer\n. Please try again\n"
+		exit 0
+	fi
+
+echo -e "\n\nWhat computer are you copying to?\nChoose one among $all_compus:\n\n"
+read tocomputer
+
+printf '\n\nEnter Directory to copy from on $computer\n\n'
+read from
+
+printf '\n\nEnter Directory to copy from to on $toComputer\n\n'
+read to
+
+echo -e "\n\nYou are copying from \n\n\t$computer:$from \n to \n\t $tocomputer:$to.\n\n Is this correct?"
+read answer
+
+
+is_yes() {
+	yesses={y,Y,yes,Yes,YES}
+	if [[ $yesses =~ $1 ]]; then
+		echo 1
+	fi
+	}
+
+is_no() {
+        noses={n,N,no,No,No}
+        if [[ $noses =~ $1 ]]; then
+                echo 1
+        fi
+        }
+
+if [ $(is_yes $answer)  ]; then
+	scp -r $computer:$from $tocomputer:$to
+else
+	echo -e "command not understood.\nPlease start all over"
+	exit 0
+fi
