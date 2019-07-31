@@ -2,7 +2,8 @@
 
 all_compus="{1=LekanOffice|2=piBerry|3=lexBerry|4=linuxWiersma}" # all computers ib our directory
 
-hosts=("Lekan@205.208.91.159" "pi@205.208.91.240" "lex@205.208.91.240" "lex205.208.91.38")
+hosts=("Lekan@205.208.91.159" "pi@205.208.91.240"
+				"lex@205.208.91.240" "lex205.208.91.38")
 echo -e "\n\nWhat computer are you copying from?\nChoose one among $all_compus:\n\n"
 read computer
 

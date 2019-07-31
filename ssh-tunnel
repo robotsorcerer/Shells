@@ -1,12 +1,13 @@
 #! /bin/bash
 
-printf "\nHello "$USER". To start your ssh tunnel, 
-		\nplease enter the machinename, e.g\n\"rok80\" or \"swmed\"\n\n"
+printf "\nHello "$USER". To start your ssh tunnel,
+		\nplease enter the machinename, e.g\n\"rok80\", \"swmed\", \"lexBerry\", \"rootBerry\" or , \"piBerry\"\n\n"
 
-# # \ne.g. as lekan@rok80x8.dhcp.swmed.org 
-# \n(if logging on to rok80, just hit the [RETURN] key): 
+# # \ne.g. as lekan@rok80x8.dhcp.swmed.org
+# \n(if logging on to rok80, just hit the [RETURN] key):
 
-hosts=("lekan@rok80x8.dhcp.swmed.org" "lex@129.112.133.210")
+hosts=("lekan@rok80x8.dhcp.swmed.org" "lex@129.112.133.210"
+				"root@205.208.91.240" "pi@205.208.91.240" "lex@205.208.91.240")
 read computer
 
 is_rok80(){
@@ -23,13 +24,40 @@ is_swmed(){
 	fi
 }
 
+is_piberry(){
+	piberry={pi,piBerry,PiBerry}
+	if [[ $piberry =~ $1 ]]; then
+		echo 1
+	fi
+}
+
+is_lexberry(){
+	lexberry={lex,lexBerry,lexberry}
+	if [[ $lexberry =~ $1 ]]; then
+		echo 1
+	fi
+}
+
+is_rootberry(){
+	rootberry={rootBerry,rootBerry}
+	if [[ $rootberry =~ $1 ]]; then
+		echo 1
+	fi
+}
+
 if [[ $(is_rok80 $computer) ]]; then
     remotecomp=${hosts[0]}
 elif [[ $(is_swmed $computer) ]]; then
     remotecomp=${hosts[1]}
+elif [[ $(is_rootberry $computer) ]]; then
+    remotecomp=${hosts[2]}
+elif [[ $(is_piberry $computer) ]]; then
+    remotecomp=${hosts[3]}
+elif [[ $(is_lexberry $computer) ]]; then
+    remotecomp=${hosts[4]}
 else
 	echo -e "\n\nYou have selected an invalid remote computer\n
-			Only swmed and rok80 are valid for now"
+			Only swmed, rok80, and berry accounts are valid for now"
 	exit 0
 fi
 
