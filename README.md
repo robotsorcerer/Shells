@@ -32,6 +32,9 @@
 + [ogv2mp4](/ogv2mp4)
   + used in converting ogv files to mp4
 
++ [mendeley.desktop](mendeley.desktop)
+  + desktop entry for mendeley reference library
+
 + [packages_precise](/packages_precise)
   + bot used in compiling packages on ubuntu 12.04
 

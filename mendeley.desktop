@@ -1,0 +1,13 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+## change this to the location of your icon on your system
+Icon=/opt/mendeley/share/icons/hicolor/64x64/apps/mendeleydesktop.png 
+Name=Mendeley Desktop
+Comment=Start Mendeley
+ # change this to the path on your system where the executable is located
+Exec=/opt/mendeley/bin/mendeleydesktop
+Categories=Development;
+
+## Be sure to copy this file to /usr/share/applications/ when you ensure that Icons and Exec are appropriately valued
+
