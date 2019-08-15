@@ -41,6 +41,12 @@
 + [packages](/packages)
   + bot used in compiling packages on ubuntu 14.04  
 
++ [ssh-tunnel](ssh-tunnel)
+  + implements a basic ssh-tunneling protocol as an adhoc vpn on my machines
+
++ [screenshot.sh](/screenshot.sh)
+  + assigns the default screen shot folder on Mac OS-aware systems to ~/Screenshots. a pseudo-duplicate of Safia Abdalla's implementation
+
 + [trim_video](/trim_video)
   + used to trim ffmpeg videos
 
