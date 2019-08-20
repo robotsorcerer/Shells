@@ -4,9 +4,9 @@ alias install=' apt install '
 alias search='apt-cache search'
 
 # Anaconda Aliases
-alias 27='source activate py27'
-alias 35='source activate py35'
-alias 37='source activate py37'
+alias 27='source activate 27'
+alias 35='source activate 35'
+alias 36='source activate 36'
 alias off='source deactivate'
 alias jup='jupyter notebook'
 alias lab='jupyter lab'

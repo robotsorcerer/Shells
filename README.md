@@ -41,6 +41,9 @@
 + [packages](/packages)
   + bot used in compiling packages on ubuntu 14.04  
 
++ [docker-none-ridder](/docker-none-ridder)
+  + removes docker images with 'none' tags 
+
 + [ssh-tunnel](ssh-tunnel)
   + implements a basic ssh-tunneling protocol as an adhoc vpn on my machines
 
