@@ -5,7 +5,7 @@ printf "\nHello "$USER". Please enter the name of the input file to compress: \n
 
 read input
 
-print "Please enter the name of the output file\n\n"
+printf "Please enter the name of the output file\n\n"
 
 read output
 

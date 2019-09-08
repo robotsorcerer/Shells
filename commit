@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# commits a change and pushes a change
-git add --all;
-
 printf "\nHello "$USER". Please enter the commit message: "
 
 read msg
+
+# commits a change and pushes a change
+git add --all;
 
 git commit -m "$msg"
 
