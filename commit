@@ -1,5 +1,19 @@
 #!/bin/bash
 
+is_yes() {
+        yesses={y,Y,yes,Yes,YES}
+        if [[ $yesses =~ $1 ]]; then
+                echo 1
+        fi
+        }
+
+is_no() {
+        noses={n,N,no,No,No}
+        if [[ $noses =~ $1 ]]; then
+                echo 1
+        fi
+        }
+
 printf "\nHello "$USER". Please enter the commit message: "
 
 read msg
@@ -24,12 +38,12 @@ fi
 echo -e "pushing from all local origins?[y|n]\n"
 read num_origins
 
-if [ num_origins == "y" ]; then
+if [ $(is_yes $num_origins) ]; then
   for orig in $(git remote); 
-	do echo "pushing from $orig to $remote\n" &&
+	do echo -e "pushing from $orig to $remote\n";
 	    git push -u $orig $remote; 
    done
-elif [ num_origins == "n" ]; then
+elif [ $(is_no $num_origins) ]; then
   git push -u origin $remote
 fi
 
