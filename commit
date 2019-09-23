@@ -21,6 +21,16 @@ if [ remote == "" ]; then
    remote=parse_git_branch
 fi
 
-git push -u origin $remote
+echo -e "pushing from all local origins?[y|n]\n"
+read num_origins
+
+if [ num_origins == "y" ]; then
+  for orig in $(git remote); 
+	do echo "pushing from $orig to $remote\n" &&
+	    git push -u $orig $remote; 
+   done
+elif [ num_origins == "n" ]; then
+  git push -u origin $remote
+fi
 
 printf "\n\n"
