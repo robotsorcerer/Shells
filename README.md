@@ -29,6 +29,10 @@
 + [gitsetup](gitsetup)
   + configures git global properties
 
++ [gitback](gitback)
+  + commits or pulls all my works for the day
+
+
 + [ogv2mp4](/ogv2mp4)
   + used in converting ogv files to mp4
 

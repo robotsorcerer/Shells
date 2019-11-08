@@ -46,8 +46,9 @@ if [[ -z "$blogmit" ]]; then
   exit 1
 fi
 
-# echo -e "Clean current directory? [yn]"
-# read res
+# source aliases
+shopt -s expand_aliases
+source ~/.zsh_aliases
 
 is_yes() {
         yesses={y,Y,yes,Yes,YES}
@@ -64,31 +65,44 @@ is_no() {
         }
 
 if [[ $(is_yes $blog) ]]; then
+   echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
    echo -e "Git in blog"
+   echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
    blog  # assumes blog as alias
    git add -A; git commit -m "auto commit";
    git pull origin master; git push origin master
 fi
 
 if [[ $(is_yes $papers) ]]; then
+   echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
    echo -e "Git in papers"
-   papers  # assumes papers as an alias
+   echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
+   # cd ~/Documents/Papers  # assumes papers as an alias
+   papers
    git add -A; git commit -m "auto commit";
    git pull origin master; git push origin master
 fi
 
 if [[ $(is_yes $niw) ]]; then
-   echo -e "Git in niw"
-   niw  # assumes papers as an alias
+   echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
+   echo -e "Git in NIW"
+   echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
+   # cd ~/Desktop/Personals  # assumes papers as an alias
+   niw
    git add -A; git commit -m "auto commit";
    git pull origin master; git push origin master
 fi
 
 if [[ $(is_yes $sup) ]]; then
-   echo -e "Git in sup"
-   sup  # assumes papers as an alias
+   echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
+   echo -e "Git in Superchicko"
+   echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
+   # cd ~/catkin_ws/src/superchicko  # assumes papers as an alias
+   sup
    git add -A; git commit -m "auto commit";
    git pull origin $parse_git_branch; git push origin $parse_git_branch
 fi
 
-echo -e "\nWe are done integrating for now\n"
+   echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
+   echo -e "We are done now"
+   echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
