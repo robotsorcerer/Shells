@@ -25,6 +25,11 @@ case $key in
   shift # past arg
   shift # past value
   ;;
+  -e|--sweng)  # superchicko?
+  supmit="$2"
+  shift # past arg
+  shift # past value
+  ;;
   *) # unknown option
   POSITIONAL+=("$1") # save in array for later use
   shift # past arg
@@ -42,7 +47,8 @@ if [[ -z "$blogmit" ]]; then
                             -b push/pull blog directory  [y/n] \t
                             -p push/pull papers directory  [y/n] \t
                             -n push/pull niw directory  [y/n] \t
-                            -s push/pull superchicko directory [y/n] \n\t"
+                            -s push/pull superchicko directory [y/n] \t 
+                            -e push/pull swengr directory [y/n]\n\t"
   exit 1
 fi
 
@@ -99,6 +105,16 @@ if [[ $(is_yes $sup) ]]; then
    echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
    # cd ~/catkin_ws/src/superchicko  # assumes papers as an alias
    sup
+   git add -A; git commit -m "auto commit";
+   git pull origin $parse_git_branch; git push origin $parse_git_branch
+fi
+
+if [[ $(is_yes $sweng) ]]; then
+   echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
+   echo -e "Git in sweng"
+   echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
+   # cd ~/catkin_ws/src/superchicko  # assumes papers as an alias
+   cd ~/Documents/FB19
    git add -A; git commit -m "auto commit";
    git pull origin $parse_git_branch; git push origin $parse_git_branch
 fi
