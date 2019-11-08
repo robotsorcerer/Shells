@@ -130,15 +130,15 @@ pull_and_push(){
 # fi
 
 if [[ $(is_yes $blog) ]]; then
-   pull_and_push "blog" "~/Documents/blog"
+   pull_and_push "blog" blog
 fi
 
 if [[ $(is_yes $papers) ]]; then
-   pull_and_push "papers"  "~/Documents/papers"
+   pull_and_push "papers"  papers
 fi
 
 if [[ $(is_yes $NIW) ]]; then
-   pull_and_push "NIW"  "~/Desktop/Personals"
+   pull_and_push "NIW"  niw
 fi
 
 if [[ $(is_yes $sup) ]]; then
