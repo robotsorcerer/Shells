@@ -71,55 +71,89 @@ is_no() {
         fi
         }
 
-if [[ $(is_yes $blog) ]]; then
+pull_and_push(){
    echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
-   echo -e "Git in blog"
+   echo -e "Git in $1"
    echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
-   blog  # assumes blog as alias
-   git add -A; git commit -m "auto commit";
-   git pull origin master; git push origin master
+   cd $2  # cd to given directory
+   git add -A; git commit -m "auto commit from gitci";
+   git pull origin $parse_git_branch; git push origin $parse_git_branch
+}        
+
+# if [[ $(is_yes $blog) ]]; then
+#    echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
+#    echo -e "Git in blog"
+#    echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
+#    blog  # assumes blog as alias
+#    git add -A; git commit -m "auto commit";
+#    git pull origin master; git push origin master
+# fi
+
+# if [[ $(is_yes $papers) ]]; then
+#    echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
+#    echo -e "Git in papers"
+#    echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
+#    # cd ~/Documents/Papers  # assumes papers as an alias
+#    papers
+#    git add -A; git commit -m "auto commit";
+#    git pull origin master; git push origin master
+# fi
+
+# if [[ $(is_yes $niw) ]]; then
+#    echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
+#    echo -e "Git in NIW"
+#    echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
+#    # cd ~/Desktop/Personals  # assumes papers as an alias
+#    niw
+#    git add -A; git commit -m "auto commit";
+#    git pull origin master; git push origin master
+# fi
+
+# if [[ $(is_yes $sup) ]]; then
+#    echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
+#    echo -e "Git in Superchicko"
+#    echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
+#    # cd ~/catkin_ws/src/superchicko  # assumes papers as an alias
+#    sup
+#    git add -A; git commit -m "auto commit";
+#    git pull origin $parse_git_branch; git push origin $parse_git_branch
+# fi
+
+# if [[ $(is_yes $sweng) ]]; then
+#    echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
+#    echo -e "Git in sweng"
+#    echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
+#    # cd ~/catkin_ws/src/superchicko  # assumes papers as an alias
+#    cd ~/Documents/FB19
+#    git add -A; git commit -m "auto commit";
+#    git pull origin $parse_git_branch; git push origin $parse_git_branch
+# fi
+
+if [[ $(is_yes $blog) ]]; then
+   pull_and_push "blog" "~/Documents/blog"
 fi
 
 if [[ $(is_yes $papers) ]]; then
-   echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
-   echo -e "Git in papers"
-   echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
-   # cd ~/Documents/Papers  # assumes papers as an alias
-   papers
-   git add -A; git commit -m "auto commit";
-   git pull origin master; git push origin master
+   pull_and_push "papers"  "~/Documents/papers"
 fi
 
-if [[ $(is_yes $niw) ]]; then
-   echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
-   echo -e "Git in NIW"
-   echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
-   # cd ~/Desktop/Personals  # assumes papers as an alias
-   niw
-   git add -A; git commit -m "auto commit";
-   git pull origin master; git push origin master
+if [[ $(is_yes $NIW) ]]; then
+   pull_and_push "NIW"  "~/Desktop/Personals"
 fi
 
 if [[ $(is_yes $sup) ]]; then
-   echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
-   echo -e "Git in Superchicko"
-   echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
-   # cd ~/catkin_ws/src/superchicko  # assumes papers as an alias
-   sup
-   git add -A; git commit -m "auto commit";
-   git pull origin $parse_git_branch; git push origin $parse_git_branch
+  if [[ uname == "Darwin" ]]; then  
+    pull_and_push "superchicko" "~/ros_ws/src/superchicko"
+  elif [[ uname == "Linux" ]]; then
+    pull_and_push "superchicko" "~/catkin_ws/src/superchicko"
+  fi
 fi
 
 if [[ $(is_yes $sweng) ]]; then
-   echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
-   echo -e "Git in sweng"
-   echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
-   # cd ~/catkin_ws/src/superchicko  # assumes papers as an alias
-   cd ~/Documents/FB19
-   git add -A; git commit -m "auto commit";
-   git pull origin $parse_git_branch; git push origin $parse_git_branch
+   pull_and_push "SWEng"  "~/Documents/FB19"
 fi
 
-   echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
-   echo -e "We are done now"
-   echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
+
+echo -e "\n>>>>>>>>>>>>>>>>>>==============================="
+echo -e "We are done now"
+echo -e ">>>>>>>>>>>>>>>>>>===============================\n"
