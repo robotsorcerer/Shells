@@ -17,6 +17,9 @@
 + [cvpatch](/cvpatch)
   + deprecated. used to update my CV
 
++ [docker-none-ridder](/docker-none-ridder)
+  + removes docker images with 'none' tags 
+
 + [ffmpeg](/ffmpeg)
   + used to compile ffmpeg from source
 
@@ -29,9 +32,8 @@
 + [gitsetup](gitsetup)
   + configures git global properties
 
-+ [gitback](gitback)
-  + commits or pulls all my works for the day
-
++ [gitci](gitci)
+  + commits or pulls all my works for the day; similar to continuous integration
 
 + [ogv2mp4](/ogv2mp4)
   + used in converting ogv files to mp4
@@ -45,8 +47,14 @@
 + [packages](/packages)
   + bot used in compiling packages on ubuntu 14.04  
 
-+ [docker-none-ridder](/docker-none-ridder)
-  + removes docker images with 'none' tags 
++ [png2jpg.sh](/png2jpg.sh)
+  + converts png files to jpg
+
++ [rename](/rename)
+  + bot used in renaming training folders in gps examples
+
++ [sparseCheckout](/sparseCheckout)
+  + performs [git sparse checkout](http://scriptedonachip/blog//git-sparse-checkout)
 
 + [ssh-tunnel](ssh-tunnel)
   + implements a basic ssh-tunneling protocol as an adhoc vpn on my machines
@@ -57,25 +65,9 @@
 + [trim_video](/trim_video)
   + used to trim ffmpeg videos
 
-
 + [vivid_packages](/vivid_packages)
   + bot used to manage installation of packages on ubuntu 15.04 (vivid)
 
 + [xenial_install](/xenial_install)
   + customized bot for managing ubuntu 16.04 xenial packages
 
-+ [rename](/rename)
-  + bot used in renaming training folders in gps examples
-
-+ [png2jpg.sh](/png2jpg.sh)
-  + converts png files to jpg
-
-+ [sparseCheckout](/sparseCheckout)
-  + performs [git sparse checkout](http://scriptedonachip/blog//git-sparse-checkout)
-
-+ [trim_video](/trim_video)
-  + ffmpeg trims a video length as specified by user
-
-
-+ [wmv2mp4](/wmv2mp4)
-  + converts wmv files to mp4
