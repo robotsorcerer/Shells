@@ -43,12 +43,13 @@ git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'
 }
 
 if [[ -z "$blogmit" ]]; then
-  echo -e "usage: `basename $0` [-b|--blog] [-p|--papers]  [-n|--niw] [-s|--sup]\n\t
+  echo -e "usage: `basename $0` [-b|--blog] [-p|--papers]  [-n|--niw] [-s|--sup]\t
+       e.g. `basename $0` -b y -p y -n y -s y \n\t
                             -b push/pull blog directory  [y/n] \t
                             -p push/pull papers directory  [y/n] \t
                             -n push/pull niw directory  [y/n] \t
                             -s push/pull superchicko directory [y/n] \t 
-                            -e push/pull swengr directory [y/n]\n\t"
+                            -e push/pull swengr directory [y/n]"
   exit 1
 fi
 
