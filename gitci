@@ -30,6 +30,11 @@ case $key in
   shift # past arg
   shift # past value
   ;;
+  -w|--screws)  # superchicko?
+  screw="$2"
+  shift # past arg
+  shift # past value
+  ;;
   *) # unknown option
   POSITIONAL+=("$1") # save in array for later use
   shift # past arg
@@ -43,19 +48,16 @@ git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'
 }
 
 if [[ -z "$blogmit" ]]; then
-  echo -e "usage: `basename $0` [-b|--blog] [-p|--papers]  [-n|--niw] [-s|--sup]\t
+  echo -e "usage: `basename $0` [-b|--blog] [-p|--papers]  [-n|--niw] [-s|--sup] [-w|--screws]\t
        e.g. `basename $0` -b y -p y -n y -s y \n\t
                             -b push/pull blog directory  [y/n] \t
                             -p push/pull papers directory  [y/n] \t
                             -n push/pull niw directory  [y/n] \t
                             -s push/pull superchicko directory [y/n] \t 
-                            -e push/pull swengr directory [y/n]"
+                            -e push/pull swengr directory [y/n]\t
+                            -w push/pull screws directory [y/n]"
   exit 1
 fi
-
-# source aliases
-shopt -s expand_aliases
-source ~/.zsh_aliases
 
 is_yes() {
         yesses={y,Y,yes,Yes,YES}
@@ -79,9 +81,17 @@ pull_and_push(){
    git pull origin $parse_git_branch; git push origin $parse_git_branch
 }        
 
+# source aliases
+shopt -s expand_aliases
+source ~/.zsh_aliases
 
 if [[ $(is_yes $blog) ]]; then
    blog
+   # update all papers
+   cp ../Papers/SRS/Continuum/kinecontrol/kinecontrol.pdf downloads/Papers/kinecontrol.pdf
+   cp ../Papers/SRS/Continuum/model/model.pdf downloads/Papers/ContinuumI.pdf
+   cp ../Papers/SRS/Springer2019/springer19.pdf downloads/Papers/Springer19.pdf
+
    pull_and_push "blog" 
 fi
 
@@ -96,11 +106,6 @@ if [[ $(is_yes $NIW) ]]; then
 fi
 
 if [[ $(is_yes $sup) ]]; then
-  # if [[ uname == "Darwin" ]]; then  
-  #   pull_and_push "superchicko" "~/ros_ws/src/superchicko"
-  # elif [[ uname == "Linux" ]]; then
-  #   pull_and_push "superchicko" "~/catkin_ws/src/superchicko"
-  # fi
   sup
   pull_and_push "superchicko" 
 fi
@@ -108,6 +113,11 @@ fi
 if [[ $(is_yes $sweng) ]]; then
   cd "~/Documents/FB19"
   pull_and_push "SWEng"  
+fi
+
+if [[ $(is_yes $screw) ]]; then
+  cd "~/Documents/screws"
+  pull_and_push "screws"  
 fi
 
 
