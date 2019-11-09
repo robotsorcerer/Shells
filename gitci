@@ -115,7 +115,7 @@ if [[ $(is_yes $sweng) ]]; then
   pull_and_push "SWEng"  
 fi
 
-if [[ $(is_yes $screw) ]]; then
+if [[ $(is_yes $screws) ]]; then
   cd "~/Documents/screws"
   pull_and_push "screws"  
 fi
