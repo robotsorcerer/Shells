@@ -88,7 +88,9 @@ source ~/.zsh_aliases
 if [[ $(is_yes $blog) ]]; then
    blog
    # update all papers
-   cp ../Papers/SRS/Continuum/kinecontrol/kinecontrol.pdf downloads/Papers/kinecontrol.pdf
+   # cp ../Papers/SRS/Continuum/kinecontrol/kinecontrol.pdf downloads/Papers/kinecontrol.pdf
+    pdftk ~/Documents/Papers/SRS/Continuum/kinecontrol/kinecontrol.pdf output downloads/Papers/kinecontrol.pdf  user_pw semaphore
+   
    cp ../Papers/SRS/Continuum/model/model.pdf downloads/Papers/ContinuumI.pdf
    cp ../Papers/SRS/Springer2019/springer19.pdf downloads/Papers/Springer19.pdf
 
@@ -115,7 +117,7 @@ if [[ $(is_yes $sweng) ]]; then
   pull_and_push "SWEng"  
 fi
 
-if [[ $(is_yes $screws) ]]; then
+if [[ $(is_yes $screw) ]]; then
   cd "~/Documents/screws"
   pull_and_push "screws"  
 fi
