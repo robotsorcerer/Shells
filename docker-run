@@ -18,14 +18,14 @@ read gpu_resp
 
 is_yes() {
 	yesses={y,Y,yes,Yes,YES}
-	if [[ $yesses =~ $1 ]]; then
+	if [ $yesses=~$1 ]; then
 		echo 1
 	fi
 	}
 
 is_no() {
         noses={n,N,no,No,No}
-        if [[ $noses =~ $1 ]]; then
+        if [ $noses=~$1 ]; then
                 echo 1
         fi
         }
