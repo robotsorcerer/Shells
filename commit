@@ -43,7 +43,7 @@ if [ $(is_yes $num_origins) ]; then
 	do echo -e "pushing from $orig to $(parse_git_branch) \n";
 	    git push -u $orig  $remote; 
    done
-elif [ [ $(is_no $num_origins) ] || [ $num_origins == "" ] ] ; then
+elif [  $(is_no $num_origins)  ||  $num_origins == ""  ] ; then
   git push -u origin $remote
 fi
 
