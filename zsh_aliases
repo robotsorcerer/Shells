@@ -72,7 +72,7 @@ export PATH="$HOME/gems/bin:$PATH"
 # VPNs/SSH
 alias uphsvpn='f5fpc -st https://vpn.uphs.upenn.edu:443'  #uphs
 alias cbica='ssh ogunmolo@cbica-cluster.uphs.upenn.edu'
-alias aws='ssh -i ~/.ssh/rbot250_ubuntu2.pem ubuntu@54.208.155.47'
+alias aws='ssh -i ~/.ssh/rbot250_ubuntu2.pem ubuntu@52.91.20.132'
 
 
 
