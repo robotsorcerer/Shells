@@ -60,8 +60,8 @@ export LDFLAGS="-L/usr/local/opt/gettext/lib:-L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/gettext/include:-I/usr/local/opt/openssl/include"
 
 # ROS PATHS
-source /opt/ros/melodic/setup.bash
-source ~/catkin_ws/devel/setup.bash
+source /opt/ros/melodic/setup.zsh
+source ~/catkin_ws/devel/setup.zsh
 export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
 
@@ -72,8 +72,7 @@ export PATH="$HOME/gems/bin:$PATH"
 # VPNs/SSH
 alias uphsvpn='f5fpc -st https://vpn.uphs.upenn.edu:443'  #uphs
 alias cbica='ssh ogunmolo@cbica-cluster.uphs.upenn.edu'
-alias aws='ssh -i ~/.ssh/rbot250_instructor.pem ec2-user@ec2-3-92-68-197.compute-1.amazonaws.com'
-alias awsbuntu='ssh -i ~/.ssh/rbot250_ubuntu2.pem ubuntu@3.86.229.10'
+alias aws='ssh -i ~/.ssh/rbot250_ubuntu2.pem ubuntu@54.208.155.47'
 
 
 
