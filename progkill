@@ -1,9 +1,27 @@
 #! /bin/bash
 
-echo -e "Please enter the name of the program you want to kill\n\n"
+POSITIONAL=()
+set -e
 
-read progname
+while getopts f: OPTION "$@"; do
+    case $OPTION in
+    f)
+        DESTROYFILE=${OPTARG}
+        ;;
+    esac
+done
 
-echo -e "\nkilling $progname"
+if [[ -z "$DESTROYFILE" ]]; then
+    echo "usage: `basename $0` -f <DESTROYFILE>"
+    exit 1
+fi
 
-ps ax | grep $progname | awk '{print $1}' | xargs kill -9
+
+# echo -e "Please enter the name of the program you want to kill\n\n"
+
+# read progname
+
+echo -e "\nkilling $DESTROYFILE"
+
+ps ax | grep $DESTROYFILE | awk '{print $1}' | xargs kill -9
+# ps ax | grep $progname | awk '{print $1}' | xargs kill -9
