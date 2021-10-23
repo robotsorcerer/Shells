@@ -4,24 +4,40 @@ alias install='sudo apt install '
 alias search='apt-cache search'
 
 # Anaconda Aliases
-alias 27='source activate py27'
-alias 35='source activate py35'
-alias 37='source activate py37'
-alias off='source deactivate'
+alias 27='conda activate 27'
+alias 35='conda activate 35'
+alias 36='conda activate 36'
+alias 37='conda activate 37'
+alias siren='conda activate siren'
+alias off='conda deactivate'
 alias jup='jupyter notebook'
 alias lab='jupyter lab'
 
+alias wintainer='ssh -L 13389:10.8.32.20:3389 NORTHAMERICA.lekanmolu@jumptainer.westus2.cloudapp.azure.com -p 22222'
+alias lintainer='ssh -p 22222 NORTHAMERICA.lekanmolu@jumptainer.westus2.cloudapp.azure.com'
+alias linsandbox='ssh -X 10.8.16.39'
+alias azure='ssh -i ~/.ssh/config -p 42233 lekanmolu@az-eus-p40-6-worker-30027.eastus.cloudapp.azure.com'
+alias tunnel='ssh -NfL 8080:localhost:8080 gcrnix'
+alias gcrnix='ssh gcrnix'
+alias disp='set-variable -name DISPLAY -value 172.31.192.1:0.0'
+alias DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+
+
 # directories nav
-alias sofa='cd ~/sofa'
-alias desk='cd ~/Desktop'
-alias doc='cd ~/Documents'
-alias down='cd ~/Downloads'
-alias blog='cd ~/Documents/blog'
-alias gps='cd ~/catkin_ws/src/gps'
-alias papers='cd ~/Documents/Papers'
-alias shells='cd ~/Downloads/shells'
-alias schol='cd ~/Desktop/scholternships'
-alias iab='cd ~/Documents/superchicko/IAB'
+alias desk='cd /mnt/c/Users/lekanmolu/Desktop'
+alias doc='cd /mnt/c/Users/lekanmolu/Documents'
+alias down='cd /mnt/c/Users/lekanmolu/Downloads'
+alias mlcont='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob'
+alias lev='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/Reachability/LevelSetsPy'
+alias part='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/Reachability/PartiGames'
+alias msr='cd /mnt/c/Users/lekanmolu/Documents/MSRProjs'
+alias igl='cd /mnt/c/Users/lekanmolu/Documents/MSRProjs/IGL'
+alias reach='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/Reachability'
+alias blog='cd /mnt/c/Users/lekanmolu/Documents/blog'
+alias papers='cd /mnt/c/Users/lekanmolu/Documents/Papers'
+alias shells='cd /mnt/c/Users/lekanmolu/Downloads/shells'
+alias schol='cd /mnt/c/Users/lekanmolu/Desktop/scholternships'
+alias lyap='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/LyapunovLearner'
 
 # ROS LAUNCHERS
 alias torup='roslaunch toroboarm_seven_bringup bringup_real.launch'
@@ -29,7 +45,8 @@ alias torik='roslaunch torobo_ik torobo.launch'
 alias torgaz='roslaunch toroboarm_seven_gazebo toroboarm_world.launch pause:=true'
 alias cm='catkin_make'
 alias cb='catkin build'
-alias ctkn='cd ~/catkin_ws'
+alias ctkn='cd /mnt/c/Users/lekanmolu/catkin_ws'
+alias sup='cd /mnt/c/Users/lekanmolu/catkin_ws/src/superchicko'
 
 # delineate python2.7 from anaconda installs
 alias python2.7='/usr/bin/python2.7'
@@ -38,43 +55,30 @@ alias python2.7='/usr/bin/python2.7'
 export CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES=1024x768
 # Install Ruby Gems to ~/gems
 export GEM_HOME=$HOME/gems
+export SOFA_ROOT=$HOME/sofa/build
 
 # PATHS EXPORTS
 export PATH=$HOME/gems/bin:/usr/local/cuda-9.0/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/opt/gettext/bin:/usr/local/opt/openssl/bin:/usr/local/texlive/2019/bin/x86_64-linux:${PATH:+:${PATH}}
 export MANPATH=/usr/local/texlive/2019/texmf-dist/doc/man
 export INFOPATH=/usr/local/texlive/2019/texmf-dist/doc/info
-export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro131/bin:~/Documents/NNs/radoncol/beam_optim/build/lib:~/catkin_ws/src/gps/build/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-export ROS_PACKAGE_PATH=~/catkin_ws/src/gps:~/catkin_ws/src/gps/gps_agent_pkg:~/catkin_ws/src/ral/pyrnn${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
-export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim:~/Documents/NNs/RadOncol/beam_optim/scripts:~/Documents/NNs/RadOncol/beam_optim/:~/Documents/NNs/RadOncol:~/catkin_ws/src/gps:~/Documents/caffe/python:~/catkin_ws/src/gps/build/lib:~/catkin_ws/src/gps/gps_agent_pkg:/home/lex/Documents/NNs/RadOncol${PYTHONPATH:+:${PYTHONPATH}}
-export CAFFE_ROOT=~/Documents/caffe/build_cudnn
+export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro131/bin:${SOFA_ROOT}/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export ROS_PACKAGE_PATH=/mnt/c/Users/lekanmolu/catkin_ws/src/gps:/mnt/c/Users/lekanmolu/catkin_ws/src/gps/gps_agent_pkg:/mnt/c/Users/lekanmolu/catkin_ws/src/ral/pyrnn${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
+export PYTHONPATH=/mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/Reachability/LevelSetsPy:~/catkin_ws/src/gps:~/Documents/caffe/python:/mnt/c/Users/lekanmolu/catkin_ws/src/gps/build/lib:/mnt/c/Users/lekanmolu/catkin_ws/src/gps/gps_agent_pkg${PYTHONPATH:+:${PYTHONPATH}}
 
 # LATEX
-export TEXINPUTS=/home/$USER/Documents/pgfplots/tex//:
-export TEXINPUTS=/home/$USER/Documents/pgfplots/doc//:
-export LUAINPUTS=/home/$USER/Documents/pgfplots//:
+export TEXINPUTS=/mnt/c/Users/lekanmolu/Documents/pgfplots/tex//:
+export TEXINPUTS=/mnt/c/Users/lekanmolu/Documents/pgfplots/doc//:
+export LUAINPUTS=/mnt/c/Users/lekanmolu/Documents/pgfplots//:
 
 # CPP FLAGS
 export LDFLAGS="-L/usr/local/opt/gettext/lib:-L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/gettext/include:-I/usr/local/opt/openssl/include"
 
 # ROS PATHS
-source /opt/ros/melodic/setup.bash
-source ~/catkin_ws/devel/setup.bash
-#ROS MASTER Exports
-#export ROS_MASTER_URI=http://172.17.0.2:11311
-#export ROS_HOSTNAME=192.168.1.7
-#ROS MASTER FOR LOCAL LONNECTIONS
 export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
+export SCREENDIR=$HOME/.screen
+export OML_API_KEY="94396c70d38d67d4aa8ce5727ca55b4e"
 
-
-if [ -d /home/$USER/anaconda2/bin ]; then
-  export PATH="/home/$USER/anaconda2/bin:${PATH:+:${PATH}}"
-elif [ -d /home/$USER/anaconda3/bin ]; then
-  export PATH="/home/$USER/anaconda3/bin:${PATH:+:${PATH}}"
-else
-  echo "Could not find an anaconda path. Please amend your path variable manually."
-fi
-
-
-
+export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+export LIBGL_ALWAYS_INDIRECT=1
