@@ -36,9 +36,9 @@ alias cb='catkin build'
 alias ctkn='cd /mnt/c/Users/lekanmolu/catkin_ws'
 alias sup='cd /mnt/c/Users/lekanmolu/catkin_ws/src/superchicko'
 alias igl='cd /mnt/c/Users/lekanmolu/Documents/MSRProjs/IGL'
-alias lev='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Robo/Reachability/LevelSetPy'
-alias lyap='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Robo/LyapunovLearner'
-alias mlcont='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Robo'
+alias lev='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/Reachability/LevelSetPy'
+alias lyap='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/LyapunovLearner'
+alias mlcont='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob'
 
 # delineate python2.7 from anaconda installs
 alias python2.7='/usr/bin/python2.7'
