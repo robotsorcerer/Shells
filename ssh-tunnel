@@ -75,10 +75,10 @@ printf "\nPlease enter the port to use for ssh port forwarding [a four digit num
 read port
 
 if [ port == "" ]; then
-    port="6140"
+    port="8080"
 fi
 
 printf "\n\nbinding localhost:$port to "$remotecomp"\n\n"
-ssh -N -f -L localhost:$port:localhost:$port $remotecomp
+ssh -N -f -L localhost:$port:localhost:$port -J jumptainer gcrnix
 
 echo -e "Done. \nYou may now type localhost:$port/lab? in your favorite browser. \n\nThanks!\n"

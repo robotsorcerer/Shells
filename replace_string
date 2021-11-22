@@ -1,0 +1,45 @@
+#!/bin/bash
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do key="$1"
+
+case $key in
+  -s|--string1) # 
+  in_str="$2"
+  shift # past argument
+  shift # past value
+  ;;
+  -r|--string2) # 
+  out_str="$2"
+  shift # past argument
+  shift # past value
+  ;;
+  *) # unknown option
+  POSITIONAL+=("$1") # save in array for later use
+  shift # past arg
+  ;;
+esac
+done
+set -- "${POSITION[@]}" # restore positional parameters
+
+
+# printf "\nString to replace: \n"
+
+echo $(in_str)
+
+# printf "\nReplacement: \n"
+
+# read string2
+
+grep -rl $(in_str) . | xargs sed -i 's/$(in_str)/$(out_str)/g'
+
+
+
+# cat <<-EOT
+
+# 	Replace a text in all files that match a string
+# 	description with another string/text using grep and sed
+
+# 	Author: Lekan Molu, $(date)
+# EOT

@@ -7,37 +7,25 @@ alias search='apt-cache search'
 alias 27='conda activate 27'
 alias 35='conda activate 35'
 alias 36='conda activate 36'
-alias 37='conda activate 37'
-alias siren='conda activate siren'
+alias 37='conda activate py37'
 alias off='conda deactivate'
 alias jup='jupyter notebook'
 alias lab='jupyter lab'
+alias gcrnix='ssh gcrnix'
 
 alias wintainer='ssh -L 13389:10.8.32.20:3389 NORTHAMERICA.lekanmolu@jumptainer.westus2.cloudapp.azure.com -p 22222'
 alias lintainer='ssh -p 22222 NORTHAMERICA.lekanmolu@jumptainer.westus2.cloudapp.azure.com'
 alias linsandbox='ssh -X 10.8.16.39'
-alias azure='ssh -i ~/.ssh/config -p 42233 lekanmolu@az-eus-p40-6-worker-30027.eastus.cloudapp.azure.com'
-alias tunnel='ssh -NfL 8080:localhost:8080 gcrnix'
-alias gcrnix='ssh gcrnix'
-alias disp='set-variable -name DISPLAY -value 172.31.192.1:0.0'
-alias DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
-
 
 # directories nav
 alias desk='cd /mnt/c/Users/lekanmolu/Desktop'
 alias doc='cd /mnt/c/Users/lekanmolu/Documents'
 alias down='cd /mnt/c/Users/lekanmolu/Downloads'
-alias mlcont='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob'
-alias lev='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/Reachability/LevelSetsPy'
-alias part='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/Reachability/PartiGames'
-alias msr='cd /mnt/c/Users/lekanmolu/Documents/MSRProjs'
-alias igl='cd /mnt/c/Users/lekanmolu/Documents/MSRProjs/IGL'
-alias reach='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/Reachability'
 alias blog='cd /mnt/c/Users/lekanmolu/Documents/blog'
 alias papers='cd /mnt/c/Users/lekanmolu/Documents/Papers'
 alias shells='cd /mnt/c/Users/lekanmolu/Downloads/shells'
 alias schol='cd /mnt/c/Users/lekanmolu/Desktop/scholternships'
-alias lyap='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/LyapunovLearner'
+alias tunnel='ssh -NfL 8080:localhost:8080 gcrnix'
 
 # ROS LAUNCHERS
 alias torup='roslaunch toroboarm_seven_bringup bringup_real.launch'
@@ -47,6 +35,10 @@ alias cm='catkin_make'
 alias cb='catkin build'
 alias ctkn='cd /mnt/c/Users/lekanmolu/catkin_ws'
 alias sup='cd /mnt/c/Users/lekanmolu/catkin_ws/src/superchicko'
+alias igl='cd /mnt/c/Users/lekanmolu/Documents/MSRProjs/IGL'
+alias lev='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/Reachability/LevelSetPy'
+alias lyap='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/LyapunovLearner'
+alias mlcont='cd /mnt/c/Users/lekanmolu/Documents/ML-Control-Rob'
 
 # delineate python2.7 from anaconda installs
 alias python2.7='/usr/bin/python2.7'
@@ -63,7 +55,7 @@ export MANPATH=/usr/local/texlive/2019/texmf-dist/doc/man
 export INFOPATH=/usr/local/texlive/2019/texmf-dist/doc/info
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro131/bin:${SOFA_ROOT}/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export ROS_PACKAGE_PATH=/mnt/c/Users/lekanmolu/catkin_ws/src/gps:/mnt/c/Users/lekanmolu/catkin_ws/src/gps/gps_agent_pkg:/mnt/c/Users/lekanmolu/catkin_ws/src/ral/pyrnn${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
-export PYTHONPATH=/mnt/c/Users/lekanmolu/Documents/ML-Control-Rob/Reachability/LevelSetsPy:~/catkin_ws/src/gps:~/Documents/caffe/python:/mnt/c/Users/lekanmolu/catkin_ws/src/gps/build/lib:/mnt/c/Users/lekanmolu/catkin_ws/src/gps/gps_agent_pkg${PYTHONPATH:+:${PYTHONPATH}}
+export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim:~/Documents/NNs/RadOncol/beam_optim/scripts:~/Documents/NNs/RadOncol/beam_optim/:~/Documents/NNs/RadOncol:~/catkin_ws/src/gps:~/Documents/caffe/python:/mnt/c/Users/lekanmolu/catkin_ws/src/gps/build/lib:/mnt/c/Users/lekanmolu/catkin_ws/src/gps/gps_agent_pkg${PYTHONPATH:+:${PYTHONPATH}}
 
 # LATEX
 export TEXINPUTS=/mnt/c/Users/lekanmolu/Documents/pgfplots/tex//:
@@ -81,4 +73,11 @@ export SCREENDIR=$HOME/.screen
 export OML_API_KEY="94396c70d38d67d4aa8ce5727ca55b4e"
 
 export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
-export LIBGL_ALWAYS_INDIRECT=1
+# export LIBGL_ALWAYS_INDIRECT=1
+
+
+
+# dbus_status=$(service dbus status)
+# if [[ $dbus_status = *"is not running"* ]]; then
+#   sudo service dbus --full-restart
+# fi
