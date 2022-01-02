@@ -18,7 +18,7 @@ alias azure='ssh -i ~/.ssh/config -p 42233 lekanmolu@az-eus-p40-6-worker-30027.e
 alias tunnel='ssh -NfL 8080:localhost:8080 gcrnix'
 alias gcrnix='ssh gcrnix'
 alias disp='set-variable -name DISPLAY -value 172.31.192.1:0.0'
-alias DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+alias DISPLAY=:0.0
 
 
 # directories nav
@@ -59,7 +59,7 @@ export MANPATH=/usr/local/texlive/2019/texmf-dist/doc/man
 export INFOPATH=/usr/local/texlive/2019/texmf-dist/doc/info
 export LD_LIBRARY_PATH=${SOFA_ROOT}/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export ROS_PACKAGE_PATH=/home/lex/catkin_ws/src/gps:${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
-export PYTHONPATH=~/Documents/ML-Control-Rob/Reachability/LevelSetsPy:${PYTHONPATH:+:${PYTHONPATH}}
+export PYTHONPATH=~/anaconda3:~/Documents/ML-Control-Rob/Reachability/LevelSetsPy:${PYTHONPATH:+:${PYTHONPATH}}
 
 # LATEX
 export TEXINPUTS=~/Documents/pgfplots/tex//:
@@ -71,6 +71,7 @@ export LDFLAGS="-L/usr/local/opt/gettext/lib:-L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/gettext/include:-I/usr/local/opt/openssl/include"
 
 # ROS PATHS
+source /opt/ros/melodic/setup.bash
 export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
 export SCREENDIR=$HOME/.screen
@@ -79,5 +80,5 @@ export OML_API_KEY="94396c70d38d67d4aa8ce5727ca55b4e"
 export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
 export LIBGL_ALWAYS_INDIRECT=1
 
-source /opt/ros/dashing/setup.bash
-source ~/ros2_ws/install/setup.bash
+#source /opt/ros/dashing/setup.bash
+#source ~/ros2_ws/install/setup.bash
