@@ -75,14 +75,8 @@ else
   echo "Could not find an anaconda path. Please amend your path variable manually."
 fi
 
-
-# http_proxy=http://proxy.swmed.edu:3128
-# https_proxy=http://proxy.swmed.edu:3128 
-# export http_proxy
-# export https_proxyy
-# export BROWSER=google-chrome
-# source /opt/ros/kinetic/setup.bash
 export CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES=1024x768
+
 # source ros 2 binaries
 . ~/ros2_install/ros2-osx/setup.bash
 

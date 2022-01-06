@@ -24,7 +24,6 @@ alias down='cd /mnt/c/Users/lekanmolu/Downloads'
 alias blog='cd /mnt/c/Users/lekanmolu/Documents/blog'
 alias papers='cd /mnt/c/Users/lekanmolu/Documents/Papers'
 alias shells='cd /mnt/c/Users/lekanmolu/Downloads/shells'
-alias schol='cd /mnt/c/Users/lekanmolu/Desktop/scholternships'
 alias tunnel='ssh -NfL 8080:localhost:8080 gcrnix'
 
 # ROS LAUNCHERS

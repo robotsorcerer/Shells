@@ -18,19 +18,20 @@ alias azure='ssh -i ~/.ssh/config -p 42233 lekanmolu@az-eus-p40-6-worker-30027.e
 alias tunnel='ssh -NfL 8080:localhost:8080 gcrnix'
 alias gcrnix='ssh gcrnix'
 alias disp='set-variable -name DISPLAY -value 172.31.192.1:0.0'
-alias DISPLAY=:0.0
 
 
 # directories nav
 alias desk='cd /home/lex/Desktop'
 alias doc='cd /home/lex/Documents'
 alias down='cd /home/lex/Downloads'
+alias lats='cd /home/lex/Documents/ML-Control-Rob/LatentLearner/robots'
 alias mlcont='cd /home/lex/Documents/ML-Control-Rob'
-alias lev='cd /home/lex/Documents/ML-Control-Rob/Reachability/LevelSetsPy'
+alias reach='cd /home/lex/Documents/ML-Control-Rob/Reachability'
+alias lev='cd /home/lex/Documents/ML-Control-Rob/Reachability/LevelSetPy'
+alias lbrat='cd /home/lex/Documents/ML-Control-Rob/Reachability/LargeBRAT'
 alias part='cd /home/lex/Documents/ML-Control-Rob/Reachability/PartiGames'
 alias msr='cd /home/lex/Documents/MSRProjs'
 alias igl='cd /home/lex/Documents/MSRProjs/IGL'
-alias reach='cd /home/lex/Documents/ML-Control-Rob/Reachability'
 alias blog='cd /home/lex/Documents/blog'
 alias papers='cd /home/lex/Documents/Papers'
 alias shells='cd /home/lex/Downloads/shells'
@@ -54,10 +55,10 @@ export GEM_HOME=$HOME/gems
 export SOFA_ROOT=$HOME/sofa/build
 
 # PATHS EXPORTS
-export PATH=$HOME/gems/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/opt/gettext/bin:/usr/local/opt/openssl/bin:${PATH:+:${PATH}}
+export PATH=$HOME/bin:$HOME/gems/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/opt/gettext/bin:/usr/local/opt/openssl/bin:${PATH:+:${PATH}}
 export MANPATH=/usr/local/texlive/2019/texmf-dist/doc/man
 export INFOPATH=/usr/local/texlive/2019/texmf-dist/doc/info
-export LD_LIBRARY_PATH=${SOFA_ROOT}/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export LD_LIBRARY_PATH=$HOME/.mujoco/mujoco210/bin:$HOME/.mujoco/mujoco211/bin:${SOFA_ROOT}/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export ROS_PACKAGE_PATH=/home/lex/catkin_ws/src/gps:${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
 export PYTHONPATH=~/anaconda3:~/Documents/ML-Control-Rob/Reachability/LevelSetsPy:${PYTHONPATH:+:${PYTHONPATH}}
 
@@ -75,10 +76,13 @@ source /opt/ros/melodic/setup.bash
 export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
 export SCREENDIR=$HOME/.screen
-export OML_API_KEY="94396c70d38d67d4aa8ce5727ca55b4e"
 
-export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+# export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
+
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
+
 
 #source /opt/ros/dashing/setup.bash
 #source ~/ros2_ws/install/setup.bash
