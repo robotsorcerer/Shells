@@ -6,7 +6,6 @@ alias search='apt-cache search'
 # Anaconda Aliases
 alias 37='conda activate 37'
 alias 38='conda activate 38'
-alias siren='conda activate siren'
 alias off='conda deactivate'
 alias jup='jupyter notebook'
 alias lab='jupyter lab'
