@@ -2,7 +2,7 @@
 #git config myne
 git config --global user.name lakehanne
 git config --global user.email patlekano@gmail.com
-git config --global core.editor vim
+git config --global core.editor subl
 git config --list			# will display the above info in terminal
 #git config --global http.proxy http://swmed.proxy.edu:3128
 

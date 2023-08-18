@@ -1,20 +1,20 @@
 #/bin/bash
 
 
-printf '\n\nbinding xhost to the docker engine'
+# printf '\n\nbinding xhost to the docker engine'
 xhost +local:root
 
-printf '\n\nWould you be attaching the display? \t [y/n] \n'
-read disp_resp
+# printf '\n\nWould you be attaching the display? \t [y/n] \n'
+# read disp_resp
 
 echo -e "\nEnter the image and tag name: e.g. \n\t<$USER/repo:tag>\n"
 read repo_tag
 
-echo -e "\nAre you attaching a usb device? \t [y/n] \n"
-read usb_resp
+# echo -e "\nAre you attaching a usb device? \t [y/n] \n"
+# read usb_resp
 
-echo -e "\nAre you attaching the system's gpu? [y|n] \n"
-read gpu_resp
+# echo -e "\nAre you attaching the system's gpu? [y|n] \n"
+# read gpu_resp
 
 is_yes() {
 	yesses={y,Y,yes,Yes,YES}
@@ -29,26 +29,28 @@ is_no() {
                 echo 1
         fi
         }
-disp="-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY=$DISPLAY"
+disp="-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY=$DISPLAY --env="QT_X11_NO_MITSHM=1""
 usb_mode="--privileged -v /dev/bus/usb:/dev/bus/usb"
 gpu_mode="--device /dev/nvidia0:/dev/nvidia0 --device /dev/nvidiactl:/dev/nvidiactl --device /dev/nvidia-uvm:/dev/nvidia-uvm"
 
-if [ $(is_yes $usb_resp)  ]  && [  $(is_yes $disp_resp) ] && [ $(is_yes $gpu_resp) ]; then
-		echo -e "running 'docker run -ti --rm $disp $usb_mode $repo_tag $gpu_mode' "
-		docker run -ti --rm $disp  $usb_mode  $gpu_mode $repo_tag
-elif [ $(is_yes $usb_resp)  ]  && [  $(is_yes $disp_resp) ] && [ $(is_no $gpu_resp) ]; then
-		echo -e "running 'docker run -ti --rm $disp $usb_mode $repo_tag' "
-		docker run -ti --rm $disp  $usb_mode  $repo_tag		
-elif [ $(is_yes $usb_resp) ] && [ $(is_no $disp_resp) ] && [ $(is_no $gpu_resp)]; then
-	echo -e "docker run -it --rm $usb_mode $repo_tag"
-        docker run -it --rm $usb_mode $repo_tag
-elif [ $(is_no $usb_resp) ] && [ $(is_no $disp_resp) ] && [ $(is_no $gpu_resp)]; then
-	echo -e "docker run -it --rm $usb_mode $repo_tag"
-        docker run -it --rm $repo_tag        
-elif [ $(is_no $usb_resp) ] && [ $(is_yes $disp_resp) ]; then
-	echo -e "docker run -ti --rm $disp $repo_tag"
-	docker run -ti --rm $disp $repo_tag
-else [ $is_no $usb_rep ] && [ $is_no  $disp_resp ]
-	echo -e "running without display or usb privileged mode"
-	docker run -ti --rm $repo_tag
-fi
+docker run -ti --rm $disp $usb_mode  $gpu_mode $repo_tag
+
+# if [ $(is_yes $usb_resp)  ]  && [  $(is_yes $disp_resp) ] && [ $(is_yes $gpu_resp) ]; then
+# 		echo -e "running 'docker run -ti --rm $disp $usb_mode $repo_tag $gpu_mode' "
+# 		docker run -ti --rm $disp  $usb_mode  $gpu_mode $repo_tag
+# elif [ $(is_yes $usb_resp)  ]  && [  $(is_yes $disp_resp) ] && [ $(is_no $gpu_resp) ]; then
+# 		echo -e "running 'docker run -ti --rm $disp $usb_mode $repo_tag' "
+# 		docker run -ti --rm $disp  $usb_mode  $repo_tag		
+# elif [ $(is_yes $usb_resp) ] && [ $(is_no $disp_resp) ] && [ $(is_no $gpu_resp)]; then
+# 	echo -e "docker run -it --rm $usb_mode $repo_tag"
+#         docker run -it --rm $usb_mode $repo_tag
+# elif [ $(is_no $usb_resp) ] && [ $(is_no $disp_resp) ] && [ $(is_no $gpu_resp)]; then
+# 	echo -e "docker run -it --rm $usb_mode $repo_tag"
+#         docker run -it --rm $repo_tag        
+# elif [ $(is_no $usb_resp) ] && [ $(is_yes $disp_resp) ]; then
+# 	echo -e "docker run -ti --rm $disp $repo_tag"
+# 	docker run -ti --rm $disp $repo_tag
+# else [ $is_no $usb_rep ] && [ $is_no  $disp_resp ]
+# 	echo -e "running without display or usb privileged mode"
+# 	docker run -ti --rm $repo_tag
+# fi

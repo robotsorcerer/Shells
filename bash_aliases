@@ -37,6 +37,7 @@ alias papers='cd /home/lex/Documents/Papers'
 alias shells='cd /home/lex/Downloads/shells'
 alias schol='cd /home/lex/Desktop/scholternships'
 alias lyap='cd /home/lex/Documents/ML-Control-Rob/LyapunovLearner'
+alias stew='sudo docker run -it --rm --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw"     --env="XAUTHORITY=$XAUTH" --volume="$XAUTH:$XAUTH" --gpus all lakehanne/melodic-stewart:latest'
 
 # ROS LAUNCHERS
 alias torup='roslaunch toroboarm_seven_bringup bringup_real.launch'
