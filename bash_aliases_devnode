@@ -1,0 +1,85 @@
+# system maintenance
+alias update='sudo apt-get update'
+alias install='sudo apt install '
+alias search='apt-cache search'
+
+# Anaconda Aliases
+alias ego4d='conda activate ego4d'
+alias 39='conda activate 39'
+alias off='conda deactivate'
+
+# directories nav
+alias desk='cd /home/lekanmolu/Desktop'
+alias doc='cd /home/lekanmolu/Documents'
+alias down='cd /home/lekanmolu/Downloads'
+alias blog='cd /home/lekanmolu/Documents/blog'
+alias papers='cd /home/lekanmolu/Documents/Papers'
+alias shells='cd /home/lekanmolu/Downloads/shells'
+alias tunnel='ssh -NfL 8080:localhost:8080 gcrnix'
+alias cws='cd ~/catkin_ws'
+alias ctpx='cd ~/catkin_ws/src/control_from_pixels'
+alias blobstore='cd /mnt/azstorage/'
+
+# ROS LAUNCHERS
+alias torup='roslaunch toroboarm_seven_bringup bringup_real.launch'
+alias torik='roslaunch torobo_ik torobo.launch'
+alias torgaz='roslaunch toroboarm_seven_gazebo toroboarm_world.launch pause:=true'
+alias cm='catkin_make'
+alias cb='catkin build'
+alias ctkn='cd /home/lekanmolu/catkin_ws'
+alias lalearn='cd /home/lekanmolu/Documents/ML-Control-Rob/LatentsDistillation/robot_representation'
+alias lyap='cd /home/lekanmolu/Documents/ML-Control-Rob/LyapunovLearner'
+alias mlcont='cd /home/lekanmolu/Documents/ML-Control-Rob'
+alias dockhydradown='docker run -ti --rm --device /dev/nvidia0:/dev/nvidia0 --device /dev/nvidia1:/dev/nvidia1 --device /dev/nvidia2:/dev/nvidia2 --device /dev/nvidia3:/dev/nvidia3 --cap-add SUS_ADMIN --device /dev/fuse:/dev/fuse lakehanne/hydra:noetic-robot'
+alias dockhydra='docker run --name slam -it --rm --privileged -v ~/Downloads/uHumans2:/opt/uHumans2 -v ~/catkin_ws/src:/catkin_ws/src --gpus all  --ipc=host --ulimit memlock=-1 --ulimit stack=67108864  --device /dev/nvidiactl:/dev/nvidiactl --device /dev/nvidia-uvm:/dev/nvidia-uvm -v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY=$DISPLAY lakehanne/hydra:0919'
+#alias dockhydra='docker run --name slam -it --rm --privileged -v ~/Downloads/uHumans2:/opt/uHumans2 -v ~/catkin_ws/src:/catkin_ws/src --gpus all  lakehanne/hydra:0903'
+alias mountteamdrive='blobfuse2 mount /mnt/azstorage  --config-file=~/blobfuse_cfg.yaml'
+alias kimera='docker run --name kimera -it --rm --privileged -v ~/Downloads/uHumans2:/opt/uHumans2 -v ~/Downloads/EUROC:/data/datasets/Euroc --gpus all  --ipc=host --ulimit memlock=-1 --ulimit stack=67108864  --device /dev/nvidiactl:/dev/nvidiactl --device /dev/nvidia-uvm:/dev/nvidia-uvm -v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY=$DISPLAY kimera_vio:latest'
+
+# delineate python2.7 from anaconda installs
+alias python2.7='/usr/bin/python2.7'
+
+# Chrome size for team viewer?
+export CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES=1024x768
+# Install Ruby Gems to ~/gems
+export GEM_HOME=$HOME/gems
+export SOFA_ROOT=$HOME/sofa/build
+
+# PATHS EXPORTS
+export PATH=$HOME/gems/bin:/usr/local/cuda-9.0/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/opt/gettext/bin:/usr/local/opt/openssl/bin:/usr/local/texlive/2019/bin/x86_64-linux:${PATH:+:${PATH}}
+export MANPATH=/usr/local/texlive/2019/texmf-dist/doc/man
+export INFOPATH=/usr/local/texlive/2019/texmf-dist/doc/info
+export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro131/bin:${SOFA_ROOT}/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export ROS_PACKAGE_PATH=/home/lekanmolu/catkin_ws/src/gps:/home/lekanmolu/catkin_ws/src/gps/gps_agent_pkg:/home/lekanmolu/catkin_ws/src/ral/pyrnn${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
+export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim:~/Documents/NNs/RadOncol/beam_optim/scripts:~/Documents/NNs/RadOncol/beam_optim/:~/Documents/NNs/RadOncol:~/catkin_ws/src/gps:~/Documents/caffe/python:/home/lekanmolu/catkin_ws/src/gps/build/lib:/home/lekanmolu/catkin_ws/src/gps/gps_agent_pkg${PYTHONPATH:+:${PYTHONPATH}}
+
+# LATEX
+export TEXINPUTS=/home/lekanmolu/Documents/pgfplots/tex//:
+export TEXINPUTS=/home/lekanmolu/Documents/pgfplots/doc//:
+export LUAINPUTS=/home/lekanmolu/Documents/pgfplots//:
+
+# CPP FLAGS
+export LDFLAGS="-L/usr/local/opt/gettext/lib:-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/gettext/include:-I/usr/local/opt/openssl/include"
+
+# ROS PATHS
+export ROS_MASTER_URI=http://localhost:11311
+export ROS_HOSTNAME=localhost
+export SCREENDIR=$HOME/.screen
+export OML_API_KEY="94396c70d38d67d4aa8ce5727ca55b4e"
+
+export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+export AZURE_URL="https://lekan.blob.core.windows.net/lekan-cont"
+export AZURE_STORAGE_KEY="Jli/QOmjLB6QCIoHXsEYxvoCTvPOXVfG0NTewbxgAXIDfwxU1Y018bhYzE+JLTlsBq9FJbXC82DtAhizoclo6g=="
+export AZURE_STORAGE_CONTAINER_NAME="lekan-cont"
+export AZURE_SAS="?sv=2023-01-03&st=2024-10-14T16%3A28%3A14Z&se=2024-10-15T16%3A28%3A14Z&skoid=e20408d1-e1af-4f2d-835f-d3facb6c0229&sktid=72f988bf-86f1-41af-91ab-2d7cd011db47&skt=2024-10-14T16%3A28%3A14Z&ske=2024-10-15T16%3A28%3A14Z&sks=b&skv=2023-01-03&sr=c&sp=rl&sig=iFE37%2FliwfpSWjlN92Ti9Tuoh4zT%2F8wqewHNLihwig8%3D"
+ #dbus_status=$(service dbus status)
+
+export DATA_STORAGE_ACCOUNT=lekan
+export DATA_STORAGE_CONTAINER=lekan_cont
+export DATA_KEYVAULT_NAME=lekankeyvault
+export RESOURCEGROUP_NAME=lekan
+export SUBSCRIPTION_ID="bbd59374-b76d-4cb5-88b6-2be35debc7cf"
+export WORKSPACE_NAME="lekan_ws"
+export AZCOPY_AUTO_LOGIN_TYPE=AZCLI
+export HF_TOKEN="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"

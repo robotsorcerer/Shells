@@ -1,0 +1,30 @@
+logging:
+  type: syslog
+  level: log_debug
+
+components:
+  - libfuse
+  - file_cache
+  - attr_cache
+  - azstorage
+
+libfuse:
+  attribute-expiration-sec: 240
+  entry-expiration-sec: 240
+  negative-entry-expiration-sec: 240
+
+file_cache:
+  path: ~/blobs
+  timeout-sec: 120
+  max-size-mb: 4096
+
+attr_cache:
+  timeout-sec: 7200
+
+azstorage:
+  type: block
+  account-name: lekan
+  container: lekan-cont
+  mode: azcli
+  endpoint: https://lekan.blob.core.windows.net
+
