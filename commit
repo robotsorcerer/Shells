@@ -20,13 +20,11 @@ is_no() {
         fi
         }
 
-printf "\nHello "$USER". Please enter the commit message: "
-
-read msg
-
 # commits a change and pushes a change
 git add --all;
 
+printf "\nHello "$USER". Please enter the commit message: "
+read msg
 git commit -m "$msg"
 
 parse_git_branch() {
@@ -57,7 +55,7 @@ if [ -n "$ssh_remotes" ]; then
     printf "Detected local network SSH remotes:\n%s\n\n" "$ssh_remotes"
 fi
 
-echo -e "\nPlease enter the name of the remote\n\nOr [Enter] to push to current branch that you are on\n\n"
+echo -e "\nPlease enter the name of the remote or [Enter] to push to current branch\n\n"
 
 read remote
 
