@@ -1,13 +1,10 @@
 #!/bin/bash
 
-# find . -name *.snm | xargs rm
-# find . -name *.log | xargs rm
-# find . -name *.brf | xargs rm
-# find . -name *.nav | xargs rm
-# find . -name *.gz | xargs rm
-# find . -name *.toc | xargs rm
-# find . -name *.blg | xargs rm
-# find . -name *.out | xargs rm
+for ext in snm nav log brf gz toc blg out aux; do
+    find . -name "*.$ext" -delete
+done
+
+find . -name __pycache__ -exec rm -rf {} +
 
 is_yes() {
         yesses={y,Y,yes,Yes,YES}
@@ -33,27 +30,89 @@ git add --all;
 git commit -m "$msg"
 
 parse_git_branch() {
-git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'
+    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
-printf "\nPlease enter the name of the upstream remote\n\nOr type Enter to push to current branch that you are on\n\n "
+list_ssh_remotes() {
+    git remote -v 2>/dev/null \
+        | grep -E '(ssh://[^@]+@|[^@]+@)[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' \
+        | grep '(fetch)' \
+        | awk '{print "  " NR") " $1 " → " $2}'
+}
+
+SSH_HOSTS_FILE="$HOME/.git_ssh_hosts"
+
+load_ssh_hosts() {
+    [ -f "$SSH_HOSTS_FILE" ] || return
+    awk -F'|' '{print NR") " $1 " → " $2 "@" $3 ":" $4}' "$SSH_HOSTS_FILE"
+}
+
+save_ssh_host() {
+    echo "${1}|${2}|${3}|${4}" >> "$SSH_HOSTS_FILE"
+}
+
+
+ssh_remotes=$(list_ssh_remotes)
+if [ -n "$ssh_remotes" ]; then
+    printf "Detected local network SSH remotes:\n%s\n\n" "$ssh_remotes"
+fi
+
+echo -e "\nPlease enter the name of the remote\n\nOr [Enter] to push to current branch that you are on\n\n"
 
 read remote
 
-if [ remote == "" ]; then
-   remote=parse_git_branch
+if [ "$remote" == "" ]; then
+   remote=$(parse_git_branch)
 fi
 
-echo -e "pushing from all local origins?[y|n]"
+echo -e "Push options: [y] all remotes  [n] origin only  [l] local network via SSH"
 read num_origins
 
-if [ $(is_yes $num_origins) ]; then
-  for orig in $(git remote); 
-	do echo -e "pushing from $orig to $(parse_git_branch) \n";
-	    git push -u $orig  $remote; 
-   done
-elif [  $(is_no $num_origins) ]; then # || [ $num_origins == ""  ] ; then
-  git push -u origin $remote
+if [ $(is_yes "$num_origins") ]; then
+  for orig in $(git remote); do
+    echo -e "pushing from $orig to $(parse_git_branch) \n"
+    git push -u $orig "$remote"
+  done
+elif [ $(is_no "$num_origins") ]; then
+  git push -u origin "$remote"
+elif [[ "$num_origins" == "l" || "$num_origins" == "L" ]]; then
+  saved=$(load_ssh_hosts)
+  is_new_host=1
+  if [ -n "$saved" ]; then
+    printf "Saved SSH hosts:\n%s\n\nEnter number to select, or press Enter to enter manually: " "$saved"
+    read host_choice
+    if [[ "$host_choice" =~ ^[0-9]+$ ]]; then
+      line=$(sed -n "${host_choice}p" "$SSH_HOSTS_FILE")
+      ssh_user=$(echo "$line" | cut -d'|' -f2)
+      ssh_ip=$(echo "$line"   | cut -d'|' -f3)
+      ssh_path=$(echo "$line" | cut -d'|' -f4)
+      is_new_host=0
+    fi
+  fi
+
+  if [ $is_new_host -eq 1 ]; then
+    printf "SSH username: ";                 read ssh_user
+    printf "IP address: ";                   read ssh_ip
+    printf "Path to git folder on remote: "; read ssh_path
+  fi
+
+  printf "Enter receive pack path on remote (leave blank for default): "; read receive_pack
+  if [ "$receive_pack" == "" ]; then
+    receive_pack=$(which git-receive-pack)
+  fi
+  echo -e "Receive pack path: $receive_pack \n"
+
+  printf "Branch to push to: "; read ssh_branch
+  git push --receive-pack="$receive_pack" "ssh://${ssh_user}@${ssh_ip}${ssh_path}" "$ssh_branch"
+
+  if [ $is_new_host -eq 1 ]; then
+    printf "Save this host for future use? [y/n] "; read save_resp
+    if [ $(is_yes "$save_resp") ]; then
+      printf "Alias for this host (e.g. homepi): "; read host_alias
+      save_ssh_host "$host_alias" "$ssh_user" "$ssh_ip" "$ssh_path"
+      echo "Host saved as '$host_alias'."
+    fi
+  fi
 fi
 
 printf "\n\n"
