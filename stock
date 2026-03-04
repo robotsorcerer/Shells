@@ -3,6 +3,7 @@
 Stock Price Monitor
 Checks current price and alerts if target hit.
 """
+import datetime
 import time
 import json
 import urllib.request
@@ -79,9 +80,10 @@ if __name__ == "__main__":
                 f"SELL ALERT ({stock})" if hit_target else "",
             ])
 
-
+        snapshot = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         print("\n" + "=" * 120)
+        print(f"Snapshot: {snapshot}")
         print_table(rows)
         print("=" * 120 + "\n")
 
-        time.sleep(0.8)
+        time.sleep(20)
