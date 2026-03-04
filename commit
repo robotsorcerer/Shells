@@ -112,5 +112,3 @@ elif [[ "$num_origins" == "l" || "$num_origins" == "L" ]]; then
     fi
   fi
 fi
-
-printf "\n\n"
