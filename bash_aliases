@@ -10,26 +10,26 @@ alias off='conda deactivate'
 alias jup='jupyter notebook'
 alias lab='jupyter lab'
 
-alias stew='sudo docker run -it --rm --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --env="XAUTHORITY=$XAUTH" --volume="$XAUTH:$XAUTH" --runtime=nvidia --volume ~/Documents/ML-Control-Rob/lalearn:/home/lalearn --volume ~/anaconda3:/home/anaconda3 --network host --gpus all lakehanne/melodic-stewart:latest'
+alias stew='sudo docker run -it --rm --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --env="XAUTHORITY=$XAUTH" --volume="$XAUTH:$XAUTH" --runtime=nvidia --volume ~/Documents/ML-Control-Rob/lalearn:/home/lalearn --volume ~/anaconda3:/home/anaconda3 --network host --gpus all YOUR_DOCKER_USERNAME/melodic-stewart:latest'
 
 # directories nav
-alias desk='cd /home/lex/Desktop'
-alias doc='cd /home/lex/Documents'
-alias down='cd /home/lex/Downloads'
-alias lats='cd /home/lex/Documents/ML-Control-Rob/LatentLearner/robots'
-alias mlcont='cd /home/lex/Documents/ML-Control-Rob'
+alias desk='cd $HOME/Desktop'
+alias doc='cd $HOME/Documents'
+alias down='cd $HOME/Downloads'
+alias lats='cd $HOME/Documents/ML-Control-Rob/LatentLearner/robots'
+alias mlcont='cd $HOME/Documents/ML-Control-Rob'
 alias reach='cd ~/Documents/ML-Control-Rob/LevelSets'
 alias lev='cd ~/Documents/ML-Control-Rob/LevelSets/LevelSetPy'
-alias blog='cd /home/lex/Documents/blog'
-alias papers='cd /home/lex/Documents/Papers'
-alias shells='cd /home/lex/Downloads/shells'
-alias cspace='cd /home/lex/Documents/ML-Control-Rob/denseslam/cspace'
-alias denseslam='cd /home/lex/Documents/ML-Control-Rob/denseslam'
-alias swe='cd /home/lex/Documents/ML-Control-Rob/SWEngr'
-alias prius='cd /home/lex/sandbox_ws/src/prius_nav'
-alias cv='cd /home/lex/Documents/grants/cv'
-alias grants='cd /home/lex/Documents/grants'
-alias data='cd /media/lex/data'
+alias blog='cd $HOME/Documents/blog'
+alias papers='cd $HOME/Documents/Papers'
+alias shells='cd $HOME/Downloads/shells'
+alias cspace='cd $HOME/Documents/ML-Control-Rob/denseslam/cspace'
+alias denseslam='cd $HOME/Documents/ML-Control-Rob/denseslam'
+alias swe='cd $HOME/Documents/ML-Control-Rob/SWEngr'
+alias prius='cd $HOME/sandbox_ws/src/prius_nav'
+alias cv='cd $HOME/Documents/grants/cv'
+alias grants='cd $HOME/Documents/grants'
+alias data='cd /media/$USER/data'
 
 # ROS LAUNCHERS
 alias torup='roslaunch toroboarm_seven_bringup bringup_real.launch'
@@ -50,7 +50,7 @@ export SOFA_ROOT=$HOME/sofa/build
 # PATHS EXPORTS
 export PATH=$HOME/bin:$HOME/gems/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/ruby:/snap/bin:/usr/local/opt/gettext/bin:/usr/local/opt/openssl/bin:${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-export ROS_PACKAGE_PATH=/home/lex/ros2_ws/src:${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
+export ROS_PACKAGE_PATH=$HOME/ros2_ws/src:${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
 export PYTHONPATH=$HOME/Documents/ML-Control-Rob/robotics/holosoma/src/holosoma:~/Documents/ML-Control-Rob/LevelSets/LevelSetsPy${PYTHONPATH:+:${PYTHONPATH}}
 export LIBGL_ALWAYS_INDIRECT=0
 
@@ -64,7 +64,6 @@ export LDFLAGS="-L/usr/local/opt/gettext/lib:-L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/gettext/include:-I/usr/local/opt/openssl/include"
 
 # ROS 2 Thingsy
-
 export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
 export SCREENDIR=$HOME/.screen
@@ -76,7 +75,7 @@ export LIBGL_ALWAYS_INDIRECT=0
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
 export XAUTH=/tmp/.docker.xauth
 export MESA_LOADER_DRIVER_OVERRIDE=i965
-export HF_TOKEN="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"
+export HF_TOKEN=""
 
 
 # when gazebo does not work out of the box, be sure to follow:
@@ -92,18 +91,18 @@ GIT_LFS_SKIP_SMUDGE=1 uv sync
 GIT_LFS_SKIP_SMUDGE=1 uv pip install -e .
 
 
-export HF_TOKEN="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"
-export PHENOML_USERNAME="iIPZsD0PGKWZYYgS2OBVqew"
-export PHENOML_PASSWORD="LPBUiU-BiXdTl7prvuMaFA"
-export PHENOML_BASE_URL="https://experiment.app.pheno.ml"
-export PHENOML_TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3NjA4MDU1NDksImlkIjoiejAzbjA0cGx5djRrZGpzIiwidHlwZSI6ImF1dGhSZWNvcmQifQ.uGt6pKyvN6o2fa1lnjvQ1xh_-ZBvDsOYHjRU1tPufUc"
+export HF_TOKEN=""
+export PHENOML_USERNAME=""
+export PHENOML_PASSWORD=""
+export PHENOML_BASE_URL=""
+export PHENOML_TOKEN=""
 # Open AI Key
-export OPENAI_API_KEY="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"
-export GOOGLE_API_KEY="AIzaSyBnXjogfShIHp_8wjKv9g0aPhx4BWyxRJk"
+export OPENAI_API_KEY=""
+export GOOGLE_API_KEY=""
 export GOOGLE_GENAI_USE_VERTEXAI="FALSE"
 
 
-export LD_LIBRARY_PATH=$HOME/.mujoco/mujoco210/bin 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia 
-export PATH="$LD_LIBRARY_PATH:$PATH" 
+export LD_LIBRARY_PATH=$HOME/.mujoco/mujoco210/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia
+export PATH="$LD_LIBRARY_PATH:$PATH"
 export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLEW.so

@@ -23,8 +23,7 @@ attr_cache:
 
 azstorage:
   type: block
-  account-name: lekan
-  container: lekan-cont
+  account-name: YOUR_STORAGE_ACCOUNT
+  container: YOUR_CONTAINER_NAME
   mode: azcli
-  endpoint: https://lekan.blob.core.windows.net
-
+  endpoint: https://YOUR_STORAGE_ACCOUNT.blob.core.windows.net

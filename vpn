@@ -18,4 +18,4 @@ rm -rf openconnect
 
 sudo ldconfig /usr/local/lib #to include built library
 
-echo "you may now use: 'sudo openconnect --juniper utswra.swmed.edu' to connect"
+echo "you may now use: 'sudo openconnect --juniper YOUR_VPN_HOST' to connect"

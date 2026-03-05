@@ -2,45 +2,230 @@
 """
 Stock Price Monitor
 Checks current price and alerts if target hit.
+Uses Nasdaq API with pre-market and after-hours support.
+
+Targets are fetched dynamically from Nasdaq at startup:
+  target_high = 1-Year analyst target price
+  target_low  = 52-week low price
 """
+import argparse
 import datetime
-import time
 import json
-import urllib.request
 import sys
+import time
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
-SYMBOLS = {
-    "INBS": (3.8, 100),
-    "LULU": (160, 320),
-    "OKLO": (60, 150),
-    "COIN": (140, 350),
-    "CRCL": (62, 133),
-    "MSTR": (140, 500),
-    "ARM": (100, 220),
-    "AMD": (100, 300),
-    "NVDA": (100, 550),
-    "MSFT": (300, 600),
+TICKERS = [
+    "INBS", "LULU", "OKLO", "COIN", "CRCL",
+    "MSTR", "ARM", "AMD", "NVDA", "MSFT", "BTC",
+]
+
+CRYPTO_TICKERS = {"BTC"}
+
+
+def asset_class(symbol):
+    return "crypto" if symbol.upper() in CRYPTO_TICKERS else "stocks"
+
+
+# ANSI colors for terminal output.
+USE_COLOR = sys.stdout.isatty()
+ANSI = {
+    "reset": "\033[0m",
+    "bold": "\033[1m",
+    "fg_white": "\033[97m",
+    "fg_cyan": "\033[96m",
+    "fg_green": "\033[92m",
+    "fg_red": "\033[91m",
+    "fg_yellow": "\033[93m",
+    "fg_magenta": "\033[95m",
+    "bg_blue": "\033[44m",
+    "bg_dark": "\033[100m",
+    "bg_red": "\033[41m",
 }
 
+NASDAQ_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/120.0.0.0 Safari/537.36"
+    ),
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Origin": "https://www.nasdaq.com",
+    "Referer": "https://www.nasdaq.com/",
+}
 
-def get_price(symbol):
-    """Fetch current price using Yahoo Finance API."""
-    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1m&range=1d"
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+col_headers = ["SYMBOL", "PRICE", "PREV_CLOSE", "CHANGE_%", "HIT_TARGET",
+               "DAY_HIGH", "VOLUME", "EXT_PRICE", "SESSION", "TARGET_LOW", "TARGET_HIGH", "ALERT"]
+widths = [len(h) for h in col_headers]
+
+
+def colorize(text, fg=None, bg=None, bold=False):
+    if not USE_COLOR:
+        return text
+    parts = []
+    if bold:
+        parts.append(ANSI["bold"])
+    if fg:
+        parts.append(ANSI[fg])
+    if bg:
+        parts.append(ANSI[bg])
+    return "".join(parts) + text + ANSI["reset"]
+
+
+def parse_dollar(s):
+    """Parse '$123.45' or 'N/A' to float, or return None."""
+    if not s or str(s).strip() in ("N/A", "NA", "--", ""):
+        return None
     try:
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read())
-            price = data["chart"]["result"][0]["meta"]["regularMarketPrice"]
-            prev_close = data["chart"]["result"][0]["meta"]["previousClose"]
-            return price, prev_close
+        return float(str(s).replace("$", "").replace(",", "").strip())
+    except ValueError:
+        return None
+
+
+def parse_volume(s):
+    """Parse '1,234,567' to int."""
+    if not s or str(s).strip() in ("N/A", "NA", "--", ""):
+        return 0
+    try:
+        return int(str(s).replace(",", "").strip())
+    except ValueError:
+        return 0
+
+
+def nasdaq_get(path):
+    """Make a GET request to the Nasdaq API."""
+    url = f"https://api.nasdaq.com/api/{path}"
+    req = urllib.request.Request(url, headers=NASDAQ_HEADERS)
+    with urllib.request.urlopen(req, timeout=10) as resp:
+        return json.loads(resp.read())
+
+
+def fetch_targets(symbol):
+    """
+    Fetch 1-year analyst target and 52-week low from Nasdaq summary endpoint.
+
+    Returns (target_low, target_high) where:
+      target_high = 1-year analyst target price
+      target_low  = 52-week low price
+    Returns (None, None) on failure.
+    """
+    try:
+        data = nasdaq_get(f"quote/{symbol}/summary?assetClass={asset_class(symbol)}")
+        sd = data["data"]["summaryData"]
+
+        # 1-year target → "$265.00"
+        one_yr = parse_dollar(sd.get("OneYrTarget", {}).get("value"))
+
+        # 52-week high/low → "$212.1899/$86.62" (high/low separated by "/")
+        hw_raw = sd.get("FiftTwoWeekHighLow", {}).get("value", "")
+        fifty_two_low = None
+        if "/" in hw_raw:
+            parts = hw_raw.split("/")
+            fifty_two_low = parse_dollar(parts[1])  # low is the second value
+
+        target_high = round(one_yr, 4) if one_yr else None
+        target_low = round(fifty_two_low, 4) if fifty_two_low else None
+        return target_low, target_high
     except Exception:
         return None, None
 
 
+def get_day_high(symbol):
+    """
+    Fetch day high from Yahoo Finance — reliable even after market close.
+    Crypto symbols are mapped to Yahoo's {SYMBOL}-USD convention.
+    """
+    yf_symbol = f"{symbol}-USD" if symbol.upper() in CRYPTO_TICKERS else symbol
+    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{yf_symbol}?interval=1m&range=1d"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            meta = json.loads(resp.read())["chart"]["result"][0]["meta"]
+            return meta.get("regularMarketDayHigh")
+    except Exception:
+        return None
+
+
+def get_extended(symbol, market_type):
+    """
+    Fetch pre-market or post-market (after-hours) price from Nasdaq.
+    market_type: 'pre' or 'post'
+    Returns price or None.
+    """
+    try:
+        data = nasdaq_get(
+            f"quote/{symbol}/extended-trading?assetclass=stocks&markettype={market_type}"
+        )
+        rows = data.get("data", {}).get("tradeDetailTable", {}).get("rows") or []
+        if rows:
+            return parse_dollar(rows[0].get("price"))
+    except Exception:
+        pass
+    return None
+
+
+def get_price(symbol):
+    """
+    Fetch current stock data from Nasdaq info endpoint.
+
+    Returns: (price, prev_close, day_high, volume, ext_price, ext_label)
+    Uses info endpoint which provides:
+      - primaryData: lastSalePrice, netChange, volume
+      - secondaryData: extended-hours price/label when actively trading extended hours
+      - keyStats.dayrange: "high/low" or "NA"
+    When marketStatus is Closed and secondaryData is absent, falls back to
+    the extended-trading endpoint (markettype=post for after-hours,
+    markettype=pre for pre-market hours).
+    """
+    try:
+        data = nasdaq_get(f"quote/{symbol}/info?assetClass={asset_class(symbol)}")
+        d = data["data"]
+        primary = d["primaryData"]
+        secondary = d.get("secondaryData")
+        key_stats = d.get("keyStats") or {}
+        market_status = d.get("marketStatus", "")
+
+        price = parse_dollar(primary.get("lastSalePrice"))
+        net_change = parse_dollar(primary.get("netChange"))
+        prev_close = round(price - net_change, 4) if price and net_change is not None else None
+
+        # Day high via Yahoo Finance — always populated, even after market close
+        day_high = get_day_high(symbol)
+
+        volume = parse_volume(primary.get("volume"))
+
+        # Extended hours via secondaryData (populated during active extended session)
+        ext_price = None
+        ext_label = None
+        if secondary:
+            ext_price = parse_dollar(secondary.get("lastSalePrice"))
+            ext_label = secondary.get("label")  # "After Hours" or "Pre-Market"
+
+        # Fallback: when market is closed, fetch last after-hours price via post endpoint.
+        # Also try pre endpoint during pre-market hours.
+        if ext_price is None and market_status == "Closed":
+            ext_price = get_extended(symbol, "post")
+            if ext_price:
+                ext_label = "After Hours"
+
+        if ext_price is None:
+            now = datetime.datetime.now()
+            hour = now.hour + now.minute / 60
+            if 4 <= hour < 9.5:
+                ext_price = get_extended(symbol, "pre")
+                if ext_price:
+                    ext_label = "Pre-Market"
+
+        return price, prev_close, day_high, volume, ext_price, ext_label
+    except Exception:
+        return (None,) * 6
+
+
 def print_table(rows):
-    headers = ["SYMBOL", "PRICE", "PREV_CLOSE", "CHANGE", "CHANGE_%", "HIT_TARGET", "ALERT"]
-    widths = [len(h) for h in headers]
+    global widths
 
     for row in rows:
         for i, value in enumerate(row):
@@ -51,39 +236,146 @@ def print_table(rows):
 
     separator = "-+-".join("-" * w for w in widths)
 
-    print(fmt_row(headers))
-    print(separator)
+    print(colorize(fmt_row(col_headers), fg="fg_white", bg="bg_blue", bold=True))
+    print(colorize(separator, fg="fg_cyan"))
+
     for row in rows:
-        print(fmt_row(row))
+        line = fmt_row(row)
+        change = row[3]
+        hit_target = row[4]
+        session = row[8]
+
+        if hit_target:
+            print(colorize(line, fg="fg_white", bg="bg_red", bold=True))
+        elif session != "Regular":
+            print(colorize(line, fg="fg_magenta", bg="bg_dark", bold=True))
+        elif change and change > 0:
+            print(colorize(line, fg="fg_green", bg="bg_dark", bold=True))
+        elif change and change < 0:
+            print(colorize(line, fg="fg_red", bg="bg_dark", bold=True))
+        else:
+            print(line)
+
+
+def build_row(stock, target_low, target_high):
+    price, prev_close, day_high, volume, ext_price, ext_label = get_price(stock)
+    if price is None:
+        return None
+    active_price = ext_price if ext_price and ext_label else price
+    change = round(active_price - prev_close, 4) if prev_close is not None else None
+    change_pct = round(change / prev_close * 100, 2) if prev_close else None
+    hit_target = bool(target_high and active_price >= target_high)
+    return [
+        stock,
+        round(price, 4),
+        round(prev_close, 4) if prev_close is not None else "N/A",
+        change_pct if change_pct is not None else "N/A",
+        hit_target,
+        round(day_high, 4) if day_high is not None else "N/A",
+        volume,
+        round(ext_price, 4) if ext_price is not None else "",
+        ext_label or "Regular",
+        target_low if target_low is not None else "N/A",
+        target_high if target_high is not None else "N/A",
+        f"SELL ALERT ({stock})" if hit_target else "",
+    ]
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Stock Price Monitor — real-time Nasdaq prices with pre/after-hours support.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=(
+            "examples:\n"
+            "  stock                           # use built-in ticker list\n"
+            "  stock AAPL TSLA                 # append stocks to built-in list\n"
+            "  stock --tickers AAPL TSLA       # same as above (flag form)\n"
+            "  stock -t AAPL TSLA              # short form\n"
+            "  stock --crypto ETH SOL          # append crypto tickers\n"
+            "  stock -c ETH SOL                # short form\n"
+            "  stock --only AAPL TSLA          # replace built-in list entirely\n"
+            "  stock --only --crypto ETH SOL   # only crypto, no default stocks\n"
+            "  stock --no-default AAPL TSLA    # alias for --only\n"
+            "  stock -t AAPL -c ETH --only     # mix stocks and crypto, no defaults\n"
+        ),
+    )
+    parser.add_argument(
+        "tickers",
+        nargs="*",
+        metavar="TICKER",
+        help="Stock ticker symbols to monitor (appended to built-in list by default)",
+    )
+    parser.add_argument(
+        "--tickers", "-t",
+        nargs="+",
+        metavar="TICKER",
+        dest="tickers_flag",
+        help="Stock ticker symbols to monitor (same as positional, useful in scripts)",
+    )
+    parser.add_argument(
+        "--crypto", "-c",
+        nargs="+",
+        metavar="TICKER",
+        dest="crypto_flag",
+        help="Crypto ticker symbols to monitor (e.g. ETH SOL XRP)",
+    )
+    parser.add_argument(
+        "--only", "--no-default",
+        action="store_true",
+        help="Ignore the built-in ticker list; monitor only the tickers you supply",
+    )
+    args = parser.parse_args()
+
+    # Register any CLI-supplied crypto tickers so asset_class() routes them correctly
+    for c in (args.crypto_flag or []):
+        CRYPTO_TICKERS.add(c.upper())
+
+    supplied_stocks = [t.upper() for t in (args.tickers + (args.tickers_flag or []))]
+    supplied_crypto = [t.upper() for t in (args.crypto_flag or [])]
+    supplied = supplied_stocks + supplied_crypto
+
+    if args.only:
+        tickers = supplied if supplied else TICKERS
+    else:
+        seen = set(TICKERS)
+        tickers = TICKERS + [t for t in supplied if t not in seen]
+
+    # Fetch targets for all tickers in parallel
+    print(colorize("Fetching targets from Nasdaq...", fg="fg_cyan", bold=True))
+    SYMBOLS = {}
+    with ThreadPoolExecutor(max_workers=len(tickers)) as pool:
+        futures = {pool.submit(fetch_targets, t): t for t in tickers}
+        for fut in as_completed(futures):
+            ticker = futures[fut]
+            t_low, t_high = fut.result()
+            SYMBOLS[ticker] = (t_low, t_high)
+            print(colorize(f"  {ticker}: low={t_low}  high={t_high}", fg="fg_yellow"))
+    # Restore original ticker order
+    SYMBOLS = {t: SYMBOLS[t] for t in tickers}
+
+    print()
+
     while True:
-        rows = []
-        for stock, (target_low, target_high) in SYMBOLS.items():
-            price, prev_close = get_price(stock)
-            if price is None:
-                print(json.dumps({"error": f"Could not fetch price for {stock}"}))
-                sys.exit(1)
-
-            change = price - prev_close if prev_close else 0
-            change_pct = (change / prev_close * 100) if prev_close else 0
-            hit_target = price >= target_high or price <= target_low
-
-            rows.append([
-                stock,
-                round(price, 4),
-                round(prev_close, 4) if prev_close else None,
-                round(change, 4),
-                round(change_pct, 2),
-                hit_target,
-                f"SELL ALERT ({stock})" if hit_target else "",
-            ])
+        with ThreadPoolExecutor(max_workers=len(SYMBOLS)) as pool:
+            futures = {
+                pool.submit(build_row, s, tl, th): s
+                for s, (tl, th) in SYMBOLS.items()
+            }
+            results = {}
+            for fut in as_completed(futures):
+                stock = futures[fut]
+                row = fut.result()
+                if row is None:
+                    print(json.dumps({"error": f"Could not fetch price for {stock}"}))
+                    sys.exit(1)
+                results[stock] = row
+        rows = [results[s] for s in SYMBOLS]
 
         snapshot = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        print("\n" + "=" * 120)
-        print(f"Snapshot: {snapshot}")
+        banner = "=" * 110
+        print("\n" + colorize(banner, fg="bg_dark"))
+        print(colorize(f"Snapshot: {snapshot}", fg="fg_white", bg="bg_dark", bold=True))
         print_table(rows)
-        print("=" * 120 + "\n")
+        print(colorize(banner, fg="bg_dark") + "\n")
 
-        time.sleep(20)
+        time.sleep(30)

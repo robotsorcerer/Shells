@@ -11,17 +11,17 @@ alias jup='jupyter notebook'
 alias lab='jupyter lab'
 alias gcrnix='ssh gcrnix'
 
-alias wintainer='ssh -L 13389:10.8.32.20:3389 NORTHAMERICA.lekanmolu@jumptainer.westus2.cloudapp.azure.com -p 22222'
-alias lintainer='ssh -p 22222 NORTHAMERICA.lekanmolu@jumptainer.westus2.cloudapp.azure.com'
-alias linsandbox='ssh -X 10.8.16.39'
+alias wintainer='ssh -L 13389:YOUR_REMOTE_IP:3389 YOUR_USERNAME@YOUR_JUMP_HOST -p 22222'
+alias lintainer='ssh -p 22222 YOUR_USERNAME@YOUR_JUMP_HOST'
+alias linsandbox='ssh -X YOUR_REMOTE_IP'
 
 # directories nav
-alias desk='cd /home/lekanmolu/lekanmolu/Desktop'
-alias doc='cd /home/lekanmolu/lekanmolu/Documents'
-alias down='cd /home/lekanmolu/lekanmolu/Downloads'
-alias blog='cd /home/lekanmolu/lekanmolu/Documents/blog'
-alias papers='cd /home/lekanmolu/lekanmolu/Documents/Papers'
-alias shells='cd /home/lekanmolu/lekanmolu/Downloads/shells'
+alias desk='cd $HOME/Desktop'
+alias doc='cd $HOME/Documents'
+alias down='cd $HOME/Downloads'
+alias blog='cd $HOME/Documents/blog'
+alias papers='cd $HOME/Documents/Papers'
+alias shells='cd $HOME/Downloads/shells'
 alias tunnel='ssh -NfL 8080:localhost:8080 gcrnix'
 
 # ROS LAUNCHERS
@@ -30,12 +30,12 @@ alias torik='roslaunch torobo_ik torobo.launch'
 alias torgaz='roslaunch toroboarm_seven_gazebo toroboarm_world.launch pause:=true'
 alias cm='catkin_make'
 alias cb='catkin build'
-alias ctkn='cd /home/lekanmolu/lekanmolu/catkin_ws'
-alias sup='cd /home/lekanmolu/lekanmolu/catkin_ws/src/superchicko'
-alias igl='cd /home/lekanmolu/lekanmolu/Documents/MSRProjs/IGL'
-alias lev='cd /home/lekanmolu/lekanmolu/Documents/ML-Control-Rob/Reachability/LevelSetPy'
-alias lyap='cd /home/lekanmolu/lekanmolu/Documents/ML-Control-Rob/LyapunovLearner'
-alias mlcont='cd /home/lekanmolu/lekanmolu/Documents/ML-Control-Rob'
+alias ctkn='cd $HOME/catkin_ws'
+alias sup='cd $HOME/catkin_ws/src/superchicko'
+alias igl='cd $HOME/Documents/MSRProjs/IGL'
+alias lev='cd $HOME/Documents/ML-Control-Rob/Reachability/LevelSetPy'
+alias lyap='cd $HOME/Documents/ML-Control-Rob/LyapunovLearner'
+alias mlcont='cd $HOME/Documents/ML-Control-Rob'
 
 # delineate python2.7 from anaconda installs
 alias python2.7='/usr/bin/python2.7'
@@ -51,13 +51,13 @@ export PATH=$HOME/gems/bin:/usr/local/cuda-9.0/local/sbin:/usr/local/bin:/usr/sb
 export MANPATH=/usr/local/texlive/2019/texmf-dist/doc/man
 export INFOPATH=/usr/local/texlive/2019/texmf-dist/doc/info
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro131/bin:${SOFA_ROOT}/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-export ROS_PACKAGE_PATH=/home/lekanmolu/lekanmolu/catkin_ws/src/gps:/home/lekanmolu/lekanmolu/catkin_ws/src/gps/gps_agent_pkg:/home/lekanmolu/lekanmolu/catkin_ws/src/ral/pyrnn${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
-export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim:~/Documents/NNs/RadOncol/beam_optim/scripts:~/Documents/NNs/RadOncol/beam_optim/:~/Documents/NNs/RadOncol:~/catkin_ws/src/gps:~/Documents/caffe/python:/home/lekanmolu/lekanmolu/catkin_ws/src/gps/build/lib:/home/lekanmolu/lekanmolu/catkin_ws/src/gps/gps_agent_pkg${PYTHONPATH:+:${PYTHONPATH}}
+export ROS_PACKAGE_PATH=$HOME/catkin_ws/src/gps:$HOME/catkin_ws/src/gps/gps_agent_pkg:$HOME/catkin_ws/src/ral/pyrnn${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
+export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim:~/Documents/NNs/RadOncol/beam_optim/scripts:~/Documents/NNs/RadOncol/beam_optim/:~/Documents/NNs/RadOncol:~/catkin_ws/src/gps:~/Documents/caffe/python:$HOME/catkin_ws/src/gps/build/lib:$HOME/catkin_ws/src/gps/gps_agent_pkg${PYTHONPATH:+:${PYTHONPATH}}
 
 # LATEX
-export TEXINPUTS=/home/lekanmolu/lekanmolu/Documents/pgfplots/tex//:
-export TEXINPUTS=/home/lekanmolu/lekanmolu/Documents/pgfplots/doc//:
-export LUAINPUTS=/home/lekanmolu/lekanmolu/Documents/pgfplots//:
+export TEXINPUTS=$HOME/Documents/pgfplots/tex//:
+export TEXINPUTS=$HOME/Documents/pgfplots/doc//:
+export LUAINPUTS=$HOME/Documents/pgfplots//:
 
 # CPP FLAGS
 export LDFLAGS="-L/usr/local/opt/gettext/lib:-L/usr/local/opt/openssl/lib"
@@ -67,7 +67,7 @@ export CPPFLAGS="-I/usr/local/opt/gettext/include:-I/usr/local/opt/openssl/inclu
 export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
 export SCREENDIR=$HOME/.screen
-export OML_API_KEY="94396c70d38d67d4aa8ce5727ca55b4e"
+export OML_API_KEY=""
 
 export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
 # export LIBGL_ALWAYS_INDIRECT=1

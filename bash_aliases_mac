@@ -1,4 +1,4 @@
-alias giant='ssh opo140030@giant.utdallas.edu'
+alias giant='ssh YOUR_USER@YOUR_HPC_HOST'
 alias cm='catkin_make'
 alias cb='catkin build'
 alias ctkn='cd ~/catkin_ws'
@@ -21,20 +21,19 @@ alias blog='cd ~/Documents/blog'
 alias schol='cd ~/Desktop/scholternships'
 alias shell='cd ~/Downloads/shells'
 alias oncol='cd ~/Documents/NNs/deep-boo'
-alias utsw='sudo openconnect --juniper --user s179161 utswra.swmed.edu'
-alias utd='sudo openconnect  --user opo140030 vpn.utdallas.edu'
-alias swmed='ssh -X lex@129.112.133.210'
-alias mounttdrive='sudo mount.cifs //mrocfs.utmroc.swmed.org/mrocdata/ /home/lex/mount/tdrive/ -o rw,username=s179161,domain=utmroc,uid=1000,gid=1000'
-#alias mounttdrive="sudo mount.cifs '//mrocfs.utmroc.swmed.org/mrocdata/Phys Research/Users/Lekan' /home/lex/tdrive/ -o rw,username=s179161,domain=utmroc,uid=1000,gid=1000"
-alias mountudrive='sudo mount.cifs //mrocfs.utmroc.swmed.org/home/S179161/ /home/lex/udrive/ -o rw,username=s179161,domain=utmroc,uid=1000,gid=1000'
-#alias tdrive='cd "/home/lex/mount/tdrive/Phys Research/Users/Lekan"'
-alias tdrive='cd "/home/lex/tdrive"'
-alias udrive='cd "/home/lex/udrive"'
-alias swmed='ssh -X lex@129.112.133.210'
-alias utddell='ssh -X lex@10.169.42.133' 
+alias utsw='sudo openconnect --juniper --user YOUR_USER YOUR_VPN_HOST'
+alias utd='sudo openconnect --user YOUR_USER YOUR_VPN_HOST'
+alias swmed='ssh -X YOUR_USER@YOUR_HOST_IP'
+alias mounttdrive='sudo mount.cifs //YOUR_FILE_SERVER/share/ $HOME/mount/tdrive/ -o rw,username=YOUR_USER,domain=YOUR_DOMAIN,uid=1000,gid=1000'
+#alias mounttdrive="sudo mount.cifs '//YOUR_FILE_SERVER/share/' $HOME/tdrive/ -o rw,username=YOUR_USER,domain=YOUR_DOMAIN,uid=1000,gid=1000"
+alias mountudrive='sudo mount.cifs //YOUR_FILE_SERVER/home/YOUR_USER/ $HOME/udrive/ -o rw,username=YOUR_USER,domain=YOUR_DOMAIN,uid=1000,gid=1000'
+alias tdrive='cd "$HOME/tdrive"'
+alias udrive='cd "$HOME/udrive"'
+alias swmed='ssh -X YOUR_USER@YOUR_HOST_IP'
+alias utddell='ssh -X YOUR_USER@YOUR_HOST_IP'
 alias scr='cd ~/Documents/NNs/deep-boo/beam_optim/scripts'
-alias rok80='ssh -X lekan@rok80x8.dhcp.swmed.org'
-alias tdrive='cd "/home/lekan/mount/tdrive/Phys Research/Users/Lekan"'
+alias rok80='ssh -X YOUR_USER@YOUR_HOST'
+alias tdrive='cd "$HOME/mount/tdrive"'
 alias torup='roslaunch toroboarm_seven_bringup bringup_real.launch'
 alias torik='roslaunch torobo_ik torobo.launch'
 alias torgaz='roslaunch toroboarm_seven_gazebo toroboarm_world.launch pause:=true'
@@ -51,14 +50,14 @@ alias python2.7='/usr/bin/python2.7'
 #export ROS_MASTER_URI=http://172.17.0.2:11311
 #export ROS_HOSTNAME=192.168.1.7
 
-#ROS MASTER FOR LOCAL LONNECTIONS
+#ROS MASTER FOR LOCAL CONNECTIONS
 export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
 
 # CUDA EXPORTS
 export PATH=/usr/local/cuda-9.0/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/opt/gettext/bin:/usr/local/opt/openssl/bin:$HOME/gems/bin:${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro131/bin:~/Documents/NNs/radoncol/beam_optim/build/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim/:~/Documents/NNs/RadOncol:~/Documents/caffe/python:/home/lex/Documents/NNs/RadOncol${PYTHONPATH:+:${PYTHONPATH}}
+export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim/:~/Documents/NNs/RadOncol:~/Documents/caffe/python:$HOME/Documents/NNs/RadOncol${PYTHONPATH:+:${PYTHONPATH}}
 export CAFFE_ROOT=~/Documents/caffe/build_cudnn
 
 export LDFLAGS="-L/usr/local/opt/gettext/lib:-L/usr/local/opt/openssl/lib"
@@ -85,6 +84,4 @@ export CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES=1024x768
 export GEM_HOME=$HOME/gems
 source ~/.iterm2_shell_integration.bash
 export NDDSHOME=/Applications/rti_connext_dds-5.3.1
-export OSPL_HOME=/Users/lex/ros2_install/ros2-osx/HDE
-
-
+export OSPL_HOME=$HOME/ros2_install/ros2-osx/HDE

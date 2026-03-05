@@ -47,7 +47,7 @@ export MANPATH=/usr/local/texlive/2019/texmf-dist/doc/man
 export INFOPATH=/usr/local/texlive/2019/texmf-dist/doc/info
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/home/$USER/mujoco/mjpro150/bin:/home/$USER/mujoco/mjpro131/bin:${SOFA_ROOT}/lib:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export ROS_PACKAGE_PATH=~/catkin_ws/src/gps:~/catkin_ws/src/gps/gps_agent_pkg:~/catkin_ws/src/ral/pyrnn${ROS_PACKAGE_PATH:+${ROS_PACKAGE_PATH}}
-export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim:~/Documents/NNs/RadOncol/beam_optim/scripts:~/Documents/NNs/RadOncol/beam_optim/:~/Documents/NNs/RadOncol:~/catkin_ws/src/gps:~/Documents/caffe/python:~/catkin_ws/src/gps/build/lib:~/catkin_ws/src/gps/gps_agent_pkg:/home/lex/Documents/NNs/RadOncol${PYTHONPATH:+:${PYTHONPATH}}
+export PYTHONPATH=~/Documents/NNs/RadOncol/beam_optim:~/Documents/NNs/RadOncol/beam_optim/scripts:~/Documents/NNs/RadOncol/beam_optim/:~/Documents/NNs/RadOncol:~/catkin_ws/src/gps:~/Documents/caffe/python:~/catkin_ws/src/gps/build/lib:~/catkin_ws/src/gps/gps_agent_pkg:$HOME/Documents/NNs/RadOncol${PYTHONPATH:+:${PYTHONPATH}}
 export CAFFE_ROOT=~/Documents/caffe/build_cudnn
 
 # LATEX
@@ -70,9 +70,9 @@ export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
 # VPNs/SSH
-alias uphsvpn='f5fpc -st https://vpn.uphs.upenn.edu:443'  #uphs
-alias cbica='ssh ogunmolo@cbica-cluster.uphs.upenn.edu'
-alias aws='ssh -i ~/.ssh/rbot250_ubuntu2.pem ubuntu@52.91.20.132'
+alias uphsvpn='f5fpc -st https://YOUR_VPN_HOST:443'
+alias cbica='ssh YOUR_USER@YOUR_CLUSTER_HOST'
+alias aws='ssh -i ~/.ssh/YOUR_KEY.pem ubuntu@YOUR_AWS_IP'
 
 
 
@@ -83,6 +83,3 @@ elif [ -d /home/$USER/anaconda3/bin ]; then
 else
   echo "Could not find an anaconda path. Please amend your path variable manually."
 fi
-
-
-

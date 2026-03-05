@@ -1,27 +1,27 @@
 Host jumptainer
-  HostName jumptainer.westus2.cloudapp.azure.com
+  HostName YOUR_JUMP_HOST.cloudapp.azure.com
   Port 22222
 
 Host gcr-sandbox-jupyter
-  HostName jumptainer.westus2.cloudapp.azure.com
+  HostName YOUR_JUMP_HOST.cloudapp.azure.com
   Port 2222
-  LocalForward 8888 10.8.16.39:8888
+  LocalForward 8888 YOUR_REMOTE_IP:8888
   RequestTTY force
   RemoteCommand /usr/bin/watch -n 60 ls
 
 Host *
-  User NORTHAMERICA.lekanmolu
+  User YOUR_USERNAME
   ForwardAgent yes
   ForwardX11 yes
   Compression yes
   Protocol 2
   ServerAliveInterval 60
-  NoHostAuthenticationForLocalhost yes 
+  NoHostAuthenticationForLocalhost yes
   ControlMaster auto
   ControlPersist 600
   #ControlPath ~/.ssh/multiplex/%C
 Host gcrnix
-  Hostname 10.8.16.39
+  Hostname YOUR_REMOTE_IP
   ProxyJump jumptainer
 Host github.com
  Hostname ssh.github.com
