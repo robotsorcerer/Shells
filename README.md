@@ -221,6 +221,48 @@ Copy [`ssh_config`](ssh_config) to `~/.ssh/config` and replace the `YOUR_*` plac
 
 ---
 
+### Docker Login 
+
+  docker login reached Docker’s auth flow, but failed at the last step:
+  saving the token. Your Docker CLI is configured to use pass as its
+  credential store, and pass has not been initialized.
+
+  The direct fix is:
+
+  gpg --list-secret-keys --keyid-format LONG
+  pass init <YOUR_GPG_KEY_ID>
+  docker login
+
+  If you do not already have a GPG key, create one first:
+
+  gpg --full-generate-key
+  gpg --list-secret-keys --keyid-format LONG
+  pass init <YOUR_GPG_KEY_ID>
+  docker login
+
+  Why this happened:
+
+  - Docker is likely using "credsStore": "pass" in /home/#USER/.docker/
+    config.json.
+  - pass needs a GPG key before it can store anything.
+  - The browser login probably succeeded, but Docker could not persist
+    the credentials locally.
+
+  If you want to confirm the config, check:
+
+  cat ~/.docker/config.json
+
+  You have three practical options:
+
+  1. Keep pass and initialize it.
+     This is the normal Linux setup.
+  2. Switch Docker to another credential helper.
+     For example secretservice, if installed.
+  3. Remove credsStore and let Docker store credentials directly in /
+     home/lex/.docker/config.json.
+     This is the least secure option.
+
+
 ## Contributing
 
 PRs and issues welcome. Scripts are intentionally minimal and dependency-free where possible.

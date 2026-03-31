@@ -9,3 +9,7 @@ id_dsa
 # Python cache
 __pycache__/
 *.pyc
+
+# Node
+stocks_serve/node_modules/
+stocks_serve/package-lock.json
